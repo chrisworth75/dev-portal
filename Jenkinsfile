@@ -26,13 +26,28 @@ pipeline {
 
                         # Copy Postman collections from various projects
                         if [ -f ../tree-svg/family-tree-api.postman_collection.json ]; then
-                            echo "✓ Copying family-tree-api.postman_collection.json"
-                            cp ../tree-svg/family-tree-api.postman_collection.json postman-collections/
+                            echo "✓ Copying tree-svg/family-tree-api.postman_collection.json"
+                            cp ../tree-svg/family-tree-api.postman_collection.json postman-collections/family-tree-svg.postman_collection.json
                         fi
 
                         if [ -f ../chris-freg-api/tests/postman/fees-api.postman_collection.json ]; then
                             echo "✓ Copying fees-api.postman_collection.json"
                             cp ../chris-freg-api/tests/postman/fees-api.postman_collection.json postman-collections/
+                        fi
+
+                        if [ -f ../family-tree-api-java/tests/postman/family-tree-api.postman_collection.json ]; then
+                            echo "✓ Copying family-tree-api-java Postman collection"
+                            cp ../family-tree-api-java/tests/postman/family-tree-api.postman_collection.json postman-collections/family-tree-api-java.postman_collection.json
+                        fi
+
+                        if [ -f ../family-tree-api-quarkus/tests/postman/family-tree-api.postman_collection.json ]; then
+                            echo "✓ Copying family-tree-api-quarkus Postman collection"
+                            cp ../family-tree-api-quarkus/tests/postman/family-tree-api.postman_collection.json postman-collections/family-tree-api-quarkus.postman_collection.json
+                        fi
+
+                        if [ -f ../family-tree-api-node/tests/postman/family-tree-api.postman_collection.json ]; then
+                            echo "✓ Copying family-tree-api-node Postman collection"
+                            cp ../family-tree-api-node/tests/postman/family-tree-api.postman_collection.json postman-collections/family-tree-api-node.postman_collection.json
                         fi
 
                         # List copied files
