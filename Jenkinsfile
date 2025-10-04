@@ -19,40 +19,41 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        echo "📦 Copying Postman collections from source projects..."
+                        echo "📦 Automatically discovering and copying Postman collections..."
 
                         # Create postman-collections directory if it doesn't exist
                         mkdir -p postman-collections
 
-                        # Copy Postman collections from various projects
-                        if [ -f ../tree-svg/family-tree-api.postman_collection.json ]; then
-                            echo "✓ Copying tree-svg/family-tree-api.postman_collection.json"
-                            cp ../tree-svg/family-tree-api.postman_collection.json postman-collections/family-tree-svg.postman_collection.json
-                        fi
+                        # Find all Postman collection files in parent directory projects
+                        # Exclude node_modules directories
+                        find .. -type f -name "*.postman_collection.json" ! -path "*/node_modules/*" | while read -r collection; do
+                            # Get the project directory name
+                            project_dir=$(basename $(dirname $(dirname "$collection")))
 
-                        if [ -f ../chris-freg-api/tests/postman/fees-api.postman_collection.json ]; then
-                            echo "✓ Copying fees-api.postman_collection.json"
-                            cp ../chris-freg-api/tests/postman/fees-api.postman_collection.json postman-collections/
-                        fi
+                            # If the file is in a tests/postman subdirectory, use the parent project name
+                            if echo "$collection" | grep -q "/tests/postman/"; then
+                                project_name=$(echo "$collection" | sed 's|.*/\\([^/]*\\)/tests/postman/.*|\\1|')
+                            else
+                                # Otherwise use the directory containing the file
+                                project_name=$(basename $(dirname "$collection"))
+                            fi
 
-                        if [ -f ../family-tree-api-java/tests/postman/family-tree-api.postman_collection.json ]; then
-                            echo "✓ Copying family-tree-api-java Postman collection"
-                            cp ../family-tree-api-java/tests/postman/family-tree-api.postman_collection.json postman-collections/family-tree-api-java.postman_collection.json
-                        fi
+                            # Get the base filename
+                            filename=$(basename "$collection")
 
-                        if [ -f ../family-tree-api-quarkus/tests/postman/family-tree-api.postman_collection.json ]; then
-                            echo "✓ Copying family-tree-api-quarkus Postman collection"
-                            cp ../family-tree-api-quarkus/tests/postman/family-tree-api.postman_collection.json postman-collections/family-tree-api-quarkus.postman_collection.json
-                        fi
+                            # Create a unique name by prefixing with project name
+                            dest_name="${project_name}-${filename}"
 
-                        if [ -f ../family-tree-api-node/tests/postman/family-tree-api.postman_collection.json ]; then
-                            echo "✓ Copying family-tree-api-node Postman collection"
-                            cp ../family-tree-api-node/tests/postman/family-tree-api.postman_collection.json postman-collections/family-tree-api-node.postman_collection.json
-                        fi
+                            echo "✓ Copying $collection -> postman-collections/$dest_name"
+                            cp "$collection" "postman-collections/$dest_name"
+                        done
 
                         # List copied files
+                        echo ""
                         echo "📋 Postman collections available:"
                         ls -la postman-collections/
+                        echo ""
+                        echo "Total collections: $(ls -1 postman-collections/*.json 2>/dev/null | wc -l)"
                     '''
                 }
             }
