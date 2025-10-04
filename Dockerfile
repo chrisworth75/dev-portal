@@ -12,10 +12,12 @@ RUN npm ci --only=production
 COPY server.js ./
 COPY public ./public
 
-# Create postman-collections directory and copy any existing files
+# Create postman-collections directory
 # Collections are populated by Jenkins build stage
 RUN mkdir -p postman-collections
-COPY postman-collections/*.json ./postman-collections/ 2>/dev/null || true
+
+# Copy collections if they exist (using wildcard that may match nothing)
+COPY postman-collections/ ./postman-collections/
 
 # Expose port 9000
 EXPOSE 9000
