@@ -6,12 +6,17 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:collection": "node generate-collection.js",
+    "test": "npm run test:api",
+    "test:api": "npm run build:collection && newman run build/api-collection.json"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "newman": "^6.2.1"
   }
 }

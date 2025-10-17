@@ -15,6 +15,27 @@ pipeline {
             }
         }
 
+        stage('Install Dependencies') {
+            steps {
+                sh '''
+                    echo "Installing Node.js dependencies..."
+                    npm install
+                    echo "Dependencies installed successfully"
+                '''
+            }
+        }
+
+        stage('Generate Postman Collection') {
+            steps {
+                sh '''
+                    echo "Generating Postman collection..."
+                    npm run build:collection
+                    echo "Collection generated successfully"
+                    ls -la build/
+                '''
+            }
+        }
+
         stage('Copy Postman Collections') {
             steps {
                 script {
@@ -56,6 +77,12 @@ pipeline {
                         echo "Total collections: $(ls -1 postman-collections/*.json 2>/dev/null | wc -l)"
                     '''
                 }
+            }
+        }
+
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: 'build/api-collection.json', fingerprint: true, allowEmptyArchive: true
             }
         }
 

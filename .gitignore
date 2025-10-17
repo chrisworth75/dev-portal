@@ -3,3 +3,4 @@ npm-debug.log
 .DS_Store
 postman-collections/*.json
 !postman-collections/.gitkeep
+build/
