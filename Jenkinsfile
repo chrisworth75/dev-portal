@@ -46,8 +46,8 @@ pipeline {
                         mkdir -p postman-collections
 
                         # Find all Postman collection files in parent directory projects
-                        # Exclude node_modules directories
-                        find .. -type f -name "*.postman_collection.json" ! -path "*/node_modules/*" | while read -r collection; do
+                        # Exclude node_modules and postman-collections directories to avoid recursive copying
+                        find .. -type f -name "*.postman_collection.json" ! -path "*/node_modules/*" ! -path "*/postman-collections/*" | while read -r collection; do
                             # Get the project directory name
                             project_dir=$(basename $(dirname $(dirname "$collection")))
 
