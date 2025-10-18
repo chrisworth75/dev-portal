@@ -58,34 +58,62 @@
                     </div>
                     <div class="card-body">
                         <div class="list-group">
-                            <a href="http://localhost:5100/health" target="_blank" class="list-group-item list-group-item-action">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Chris Freg API</h5>
-                                    <small>:5100</small>
+                            <div class="list-group-item" data-api="chris-freg" data-health-url="http://localhost:5100/health">
+                                <div class="d-flex w-100 justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="mb-1">Chris Freg API</h5>
+                                        <p class="mb-1">Fees register API</p>
+                                    </div>
+                                    <div class="text-end">
+                                        <small class="d-block">:5100</small>
+                                        <span class="health-status-indicator" id="health-chris-freg">
+                                            <span class="spinner-border spinner-border-sm" role="status"></span>
+                                        </span>
+                                    </div>
                                 </div>
-                                <p class="mb-1">Fees register API</p>
-                            </a>
-                            <a href="http://localhost:8080/health" target="_blank" class="list-group-item list-group-item-action">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Family Tree API (Java)</h5>
-                                    <small>:8080</small>
+                            </div>
+                            <div class="list-group-item" data-api="family-tree-java" data-health-url="http://localhost:8080/health">
+                                <div class="d-flex w-100 justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="mb-1">Family Tree API (Java)</h5>
+                                        <p class="mb-1">Spring Boot family tree API</p>
+                                    </div>
+                                    <div class="text-end">
+                                        <small class="d-block">:8080</small>
+                                        <span class="health-status-indicator" id="health-family-tree-java">
+                                            <span class="spinner-border spinner-border-sm" role="status"></span>
+                                        </span>
+                                    </div>
                                 </div>
-                                <p class="mb-1">Spring Boot family tree API</p>
-                            </a>
-                            <a href="http://localhost:8080/health" target="_blank" class="list-group-item list-group-item-action">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Family Tree API (Quarkus)</h5>
-                                    <small>:8080</small>
+                            </div>
+                            <div class="list-group-item" data-api="family-tree-quarkus" data-health-url="http://localhost:8081/health">
+                                <div class="d-flex w-100 justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="mb-1">Family Tree API (Quarkus)</h5>
+                                        <p class="mb-1">Quarkus family tree API</p>
+                                    </div>
+                                    <div class="text-end">
+                                        <small class="d-block">:8081</small>
+                                        <span class="health-status-indicator" id="health-family-tree-quarkus">
+                                            <span class="spinner-border spinner-border-sm" role="status"></span>
+                                        </span>
+                                    </div>
                                 </div>
-                                <p class="mb-1">Quarkus family tree API</p>
-                            </a>
-                            <a href="http://localhost:3000/health" target="_blank" class="list-group-item list-group-item-action">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Family Tree API (Node)</h5>
-                                    <small>:3000</small>
+                            </div>
+                            <div class="list-group-item" data-api="family-tree-node" data-health-url="http://localhost:3000/health">
+                                <div class="d-flex w-100 justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="mb-1">Family Tree API (Node)</h5>
+                                        <p class="mb-1">Node.js/Express family tree API</p>
+                                    </div>
+                                    <div class="text-end">
+                                        <small class="d-block">:3000</small>
+                                        <span class="health-status-indicator" id="health-family-tree-node">
+                                            <span class="spinner-border spinner-border-sm" role="status"></span>
+                                        </span>
+                                    </div>
                                 </div>
-                                <p class="mb-1">Node.js/Express family tree API</p>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -23,62 +23,78 @@ async function loadAPIDocumentation() {
 
             html += '<div class="accordion mb-4" id="accordion' + collectionIndex + '">';
 
-            collectionData.item.forEach((item, itemIndex) => {
-                const request = item.request;
-                const method = request.method;
-                const url = typeof request.url === 'string' ? request.url : getUrlString(request.url);
-                const accordionId = `collapse${collectionIndex}_${itemIndex}`;
+            // Function to process items recursively (handles folders)
+            function processItems(items, parentIndex = '') {
+                items.forEach((item, itemIndex) => {
+                    const currentIndex = parentIndex + itemIndex;
 
-                html += `
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#${accordionId}">
-                                <span class="method-badge method-${method.toLowerCase()}">${method}</span>
-                                <strong>${item.name}</strong>
+                    // Check if this is a folder (has nested items) or a request
+                    if (item.item && Array.isArray(item.item)) {
+                        // This is a folder - add a header and process nested items
+                        html += `<h5 class="mt-3 mb-2 folder-title">${item.name}</h5>`;
+                        processItems(item.item, currentIndex + '_');
+                    } else if (item.request) {
+                        // This is an actual request
+                        const request = item.request;
+                        const method = request.method;
+                        const url = typeof request.url === 'string' ? request.url : getUrlString(request.url);
+                        const accordionId = `collapse${collectionIndex}_${currentIndex}`;
+
+                        html += `
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#${accordionId}">
+                                        <span class="method-badge method-${method.toLowerCase()}">${method}</span>
+                                        <strong>${item.name}</strong>
+                                    </button>
+                                </h2>
+                                <div id="${accordionId}" class="accordion-collapse collapse"
+                                     data-bs-parent="#accordion${collectionIndex}">
+                                    <div class="accordion-body">
+                                        <p><strong>URL:</strong> <code>${url}</code></p>
+                        `;
+
+                        // Add headers if present
+                        if (request.header && request.header.length > 0) {
+                            html += '<p><strong>Headers:</strong></p><ul>';
+                            request.header.forEach(header => {
+                                html += `<li><code>${header.key}: ${header.value}</code></li>`;
+                            });
+                            html += '</ul>';
+                        }
+
+                        // Add body if present
+                        if (request.body && request.body.raw) {
+                            html += '<p><strong>Request Body:</strong></p>';
+                            html += '<div class="request-body">';
+                            try {
+                                const formatted = JSON.stringify(JSON.parse(request.body.raw), null, 2);
+                                html += `<pre>${escapeHtml(formatted)}</pre>`;
+                            } catch {
+                                html += `<pre>${escapeHtml(request.body.raw)}</pre>`;
+                            }
+                            html += '</div>';
+                        }
+
+                        // Add Try It button
+                        html += `
+                            <button class="btn btn-sm btn-primary mt-3" onclick="tryRequest('${method}', '${escapeQuotes(url)}', ${request.body ? `'${escapeQuotes(request.body.raw)}'` : 'null'})">
+                                Try it
                             </button>
-                        </h2>
-                        <div id="${accordionId}" class="accordion-collapse collapse"
-                             data-bs-parent="#accordion${collectionIndex}">
-                            <div class="accordion-body">
-                                <p><strong>URL:</strong> <code>${url}</code></p>
-                `;
+                        `;
 
-                // Add headers if present
-                if (request.header && request.header.length > 0) {
-                    html += '<p><strong>Headers:</strong></p><ul>';
-                    request.header.forEach(header => {
-                        html += `<li><code>${header.key}: ${header.value}</code></li>`;
-                    });
-                    html += '</ul>';
-                }
-
-                // Add body if present
-                if (request.body && request.body.raw) {
-                    html += '<p><strong>Request Body:</strong></p>';
-                    html += '<div class="request-body">';
-                    try {
-                        const formatted = JSON.stringify(JSON.parse(request.body.raw), null, 2);
-                        html += `<pre>${escapeHtml(formatted)}</pre>`;
-                    } catch {
-                        html += `<pre>${escapeHtml(request.body.raw)}</pre>`;
-                    }
-                    html += '</div>';
-                }
-
-                // Add Try It button
-                html += `
-                    <button class="btn btn-sm btn-primary mt-3" onclick="tryRequest('${method}', '${escapeQuotes(url)}', ${request.body ? `'${escapeQuotes(request.body.raw)}'` : 'null'})">
-                        Try it
-                    </button>
-                `;
-
-                html += `
+                        html += `
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                `;
-            });
+                        `;
+                    }
+                });
+            }
+
+            // Start processing items
+            processItems(collectionData.item);
 
             html += '</div>';
         });
@@ -92,10 +108,17 @@ async function loadAPIDocumentation() {
 }
 
 function getUrlString(urlObj) {
-    if (typeof urlObj === 'string') return urlObj;
+    if (typeof urlObj === 'string') {
+        // Replace Postman variables with actual values
+        return urlObj.replace(/\{\{baseUrl\}\}/g, 'http://localhost:5100');
+    }
 
     const protocol = urlObj.protocol || 'http';
-    const host = Array.isArray(urlObj.host) ? urlObj.host.join('.') : urlObj.host;
+    let host = Array.isArray(urlObj.host) ? urlObj.host.join('.') : urlObj.host;
+
+    // Replace Postman variables in host
+    host = host.replace(/\{\{baseUrl\}\}/g, 'localhost:5100');
+
     const port = urlObj.port ? `:${urlObj.port}` : '';
     const path = Array.isArray(urlObj.path) ? '/' + urlObj.path.join('/') : '';
 
@@ -109,7 +132,14 @@ function escapeHtml(text) {
 }
 
 function escapeQuotes(text) {
-    return text.replace(/'/g, "\\'").replace(/"/g, '\\"');
+    if (!text) return '';
+    return text
+        .replace(/\\/g, '\\\\')  // Escape backslashes first
+        .replace(/'/g, "\\'")     // Escape single quotes
+        .replace(/"/g, '\\"')     // Escape double quotes
+        .replace(/\n/g, '\\n')    // Escape newlines
+        .replace(/\r/g, '\\r')    // Escape carriage returns
+        .replace(/\t/g, '\\t');   // Escape tabs
 }
 
 async function tryRequest(method, url, body) {
@@ -134,5 +164,56 @@ async function tryRequest(method, url, body) {
     }
 }
 
-// Load documentation on page load
-document.addEventListener('DOMContentLoaded', loadAPIDocumentation);
+// Health check functionality
+const healthCheckAPIs = [];
+
+async function checkAPIHealth(apiId, healthUrl) {
+    const indicator = document.getElementById(`health-${apiId}`);
+
+    try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+
+        const response = await fetch(healthUrl, {
+            signal: controller.signal
+        });
+
+        clearTimeout(timeoutId);
+
+        if (response.ok) {
+            indicator.innerHTML = '<span class="badge bg-success">Healthy</span>';
+        } else {
+            indicator.innerHTML = '<span class="badge bg-danger">Unhealthy</span>';
+        }
+    } catch (error) {
+        indicator.innerHTML = '<span class="badge bg-danger">Down</span>';
+    }
+}
+
+function startHealthChecks() {
+    // Find all API elements with health check URLs
+    const apiElements = document.querySelectorAll('[data-health-url]');
+
+    apiElements.forEach(element => {
+        const apiId = element.getAttribute('data-api');
+        const healthUrl = element.getAttribute('data-health-url');
+
+        healthCheckAPIs.push({ apiId, healthUrl });
+
+        // Perform initial check immediately
+        checkAPIHealth(apiId, healthUrl);
+    });
+
+    // Set up interval to check every 10 seconds
+    setInterval(() => {
+        healthCheckAPIs.forEach(({ apiId, healthUrl }) => {
+            checkAPIHealth(apiId, healthUrl);
+        });
+    }, 10000);
+}
+
+// Load documentation and start health checks on page load
+document.addEventListener('DOMContentLoaded', () => {
+    loadAPIDocumentation();
+    startHealthChecks();
+});

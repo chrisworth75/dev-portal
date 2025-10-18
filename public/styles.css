@@ -79,3 +79,23 @@ pre {
   margin-bottom: 15px;
   color: #333;
 }
+
+.health-status-indicator {
+  display: inline-block;
+  min-width: 70px;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.health-status-indicator .badge {
+  font-size: 0.85em;
+  padding: 6px 12px;
+}
+
+.list-group-item[data-api] {
+  cursor: default;
+}
+
+.list-group-item[data-api]:hover {
+  background-color: #f8f9fa;
+}
