@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 9000;
 app.use(express.static('public'));
 app.use(express.json());
 
-// API endpoint to get postman collections
+// API endpoint to get postman collections with environment variables
 app.get('/api/postman-collections', (req, res) => {
   const collectionsDir = path.join(__dirname, 'postman-collections');
 
@@ -18,7 +18,7 @@ app.get('/api/postman-collections', (req, res) => {
   }
 
   const files = fs.readdirSync(collectionsDir)
-    .filter(file => file.endsWith('.json'))
+    .filter(file => file.endsWith('.json') && !file.endsWith('.postman_environment.json'))
     .map(file => {
       const content = fs.readFileSync(path.join(collectionsDir, file), 'utf8');
       return {
@@ -28,6 +28,39 @@ app.get('/api/postman-collections', (req, res) => {
     });
 
   res.json(files);
+});
+
+// API endpoint to get postman environment variables
+app.get('/api/postman-environments', (req, res) => {
+  const collectionsDir = path.join(__dirname, 'postman-collections');
+
+  if (!fs.existsSync(collectionsDir)) {
+    return res.json({});
+  }
+
+  const envFiles = fs.readdirSync(collectionsDir)
+    .filter(file => file.endsWith('.postman_environment.json'));
+
+  const variables = {};
+
+  envFiles.forEach(file => {
+    try {
+      const content = fs.readFileSync(path.join(collectionsDir, file), 'utf8');
+      const env = JSON.parse(content);
+
+      if (env.values && Array.isArray(env.values)) {
+        env.values.forEach(v => {
+          if (v.enabled !== false) {
+            variables[v.key] = v.value;
+          }
+        });
+      }
+    } catch (error) {
+      console.error(`Error reading environment file ${file}:`, error);
+    }
+  });
+
+  res.json(variables);
 });
 
 // Health check

@@ -1,6 +1,13 @@
+// Global variables object
+let envVariables = {};
+
 // Fetch and display API documentation from Postman collections
 async function loadAPIDocumentation() {
     try {
+        // Load environment variables first
+        const envResponse = await fetch('/api/postman-environments');
+        envVariables = await envResponse.json();
+
         const response = await fetch('/api/postman-collections');
         const collections = await response.json();
 
@@ -107,18 +114,31 @@ async function loadAPIDocumentation() {
     }
 }
 
+function replaceVariables(str) {
+    if (!str || typeof str !== 'string') return str;
+
+    let result = str;
+    Object.keys(envVariables).forEach(key => {
+        const regex = new RegExp(`{{${key}}}`, 'g');
+        result = result.replace(regex, envVariables[key]);
+    });
+
+    return result;
+}
+
 function getUrlString(urlObj) {
     if (typeof urlObj === 'string') {
-        // Replace Postman variables with actual values
-        return urlObj.replace(/\{\{baseUrl\}\}/g, 'http://localhost:5100');
+        return replaceVariables(urlObj);
+    }
+
+    // Handle raw URL first
+    if (urlObj.raw) {
+        return replaceVariables(urlObj.raw);
     }
 
     const protocol = urlObj.protocol || 'http';
     let host = Array.isArray(urlObj.host) ? urlObj.host.join('.') : urlObj.host;
-
-    // Replace Postman variables in host
-    host = host.replace(/\{\{baseUrl\}\}/g, 'localhost:5100');
-
+    host = replaceVariables(host);
     const port = urlObj.port ? `:${urlObj.port}` : '';
     const path = Array.isArray(urlObj.path) ? '/' + urlObj.path.join('/') : '';
 
@@ -144,6 +164,10 @@ function escapeQuotes(text) {
 
 async function tryRequest(method, url, body) {
     try {
+        // Replace variables in URL and body
+        const resolvedUrl = replaceVariables(url);
+        const resolvedBody = body ? replaceVariables(body) : null;
+
         const options = {
             method: method,
             headers: {
@@ -151,11 +175,11 @@ async function tryRequest(method, url, body) {
             }
         };
 
-        if (body && (method === 'POST' || method === 'PUT' || method === 'PATCH')) {
-            options.body = body;
+        if (resolvedBody && (method === 'POST' || method === 'PUT' || method === 'PATCH')) {
+            options.body = resolvedBody;
         }
 
-        const response = await fetch(url, options);
+        const response = await fetch(resolvedUrl, options);
         const data = await response.json();
 
         alert(`Response (${response.status}):\n${JSON.stringify(data, null, 2)}`);
