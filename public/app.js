@@ -180,11 +180,31 @@ async function tryRequest(method, url, body) {
         }
 
         const response = await fetch(resolvedUrl, options);
-        const data = await response.json();
 
-        alert(`Response (${response.status}):\n${JSON.stringify(data, null, 2)}`);
+        // Get response as text first to handle parsing errors
+        const responseText = await response.text();
+
+        let data;
+        try {
+            data = JSON.parse(responseText);
+        } catch (parseError) {
+            alert(`JSON Parse Error:\n${parseError.message}\n\nResponse:\n${responseText.substring(0, 500)}`);
+            return;
+        }
+
+        // For large responses (arrays with many items), show summary
+        let displayData = data;
+        let summary = '';
+
+        if (Array.isArray(data) && data.length > 5) {
+            summary = `Response contains ${data.length} items. Showing first 3:\n\n`;
+            displayData = data.slice(0, 3);
+        }
+
+        const jsonString = JSON.stringify(displayData, null, 2);
+        alert(`${summary}Response (${response.status}):\n${jsonString}`);
     } catch (error) {
-        alert(`Error: ${error.message}`);
+        alert(`Error: ${error.message}\n\nStack: ${error.stack}`);
     }
 }
 
