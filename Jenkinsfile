@@ -89,11 +89,12 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def image = docker.build("${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER}")
-                    docker.withRegistry("http://${REGISTRY}") {
-                        image.push()
-                        image.push('latest')
-                    }
+                    sh """
+                        docker build -t ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} .
+                        docker tag ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} ${REGISTRY}/${IMAGE_NAME}:latest
+                        docker push ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER}
+                        docker push ${REGISTRY}/${IMAGE_NAME}:latest
+                    """
                 }
             }
         }
@@ -128,7 +129,7 @@ pipeline {
             }
             steps {
                 script {
-                    sleep 10 // Wait for container to start
+                    sh 'sleep 10' // Wait for container to start
                     sh 'curl -f http://localhost:9000/health || echo "Health check failed - container may still be starting"'
                 }
             }
