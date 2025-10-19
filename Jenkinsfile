@@ -105,6 +105,12 @@ pipeline {
             }
             steps {
                 script {
+                    // Kill any process using port 9000
+                    sh """
+                        echo "Killing any process using port 9000..."
+                        lsof -ti:9000 | xargs kill -9 || true
+                    """
+
                     // Stop existing container if running
                     sh """
                         docker stop ${IMAGE_NAME} || true
