@@ -134,5 +134,46 @@ async function tryRequest(method, url, body) {
     }
 }
 
+// Health check functionality
+async function checkHealth(url) {
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache'
+        });
+        return response.ok;
+    } catch (error) {
+        return false;
+    }
+}
+
+async function updateHealthIndicators() {
+    const indicators = document.querySelectorAll('.health-indicator');
+
+    for (const indicator of indicators) {
+        const url = indicator.getAttribute('data-url');
+        if (url) {
+            const isHealthy = await checkHealth(url);
+
+            if (isHealthy) {
+                indicator.classList.add('health-green');
+                indicator.classList.remove('health-red');
+                indicator.innerHTML = `<span class="health-dot">●</span> ${indicator.textContent.trim()}`;
+            } else {
+                indicator.classList.add('health-red');
+                indicator.classList.remove('health-green');
+                indicator.innerHTML = `<span class="health-dot">●</span> ${indicator.textContent.trim()}`;
+            }
+        }
+    }
+}
+
 // Load documentation on page load
-document.addEventListener('DOMContentLoaded', loadAPIDocumentation);
+document.addEventListener('DOMContentLoaded', () => {
+    loadAPIDocumentation();
+    updateHealthIndicators();
+
+    // Refresh health indicators every 30 seconds
+    setInterval(updateHealthIndicators, 30000);
+});

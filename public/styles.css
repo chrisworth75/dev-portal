@@ -79,3 +79,21 @@ pre {
   margin-bottom: 15px;
   color: #333;
 }
+
+/* Health Indicator Styles */
+.health-indicator {
+  font-weight: bold;
+}
+
+.health-green {
+  color: #28a745;
+}
+
+.health-red {
+  color: #dc3545;
+}
+
+.health-dot {
+  font-size: 1.2em;
+  margin-right: 3px;
+}
