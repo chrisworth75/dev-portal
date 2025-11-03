@@ -1,7 +1,10 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const { exec } = require('child_process');
+const { promisify } = require('util');
 
+const execAsync = promisify(exec);
 const app = express();
 const PORT = process.env.PORT || 9000;
 
@@ -33,6 +36,209 @@ app.get('/api/postman-collections', (req, res) => {
 // Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', port: PORT });
+});
+
+// Docker service configuration - individual services
+const DOCKER_SERVICES = {
+  'vote-ui': { path: '/Users/chris/dev-vote', service: 'vote-ui' },
+  'vote-ui-vue': { path: '/Users/chris/dev-vote', service: 'vote-ui-vue' },
+  'vote-ui-react': { path: '/Users/chris/dev-vote', service: 'vote-ui-react' },
+  'vote-ui-angular': { path: '/Users/chris/dev-vote', service: 'vote-ui-angular' },
+  'vote-api': { path: '/Users/chris/dev-vote', service: 'vote-api' },
+  'vote-db': { path: '/Users/chris/dev-vote', service: 'vote-db' },
+  'freg-angular': { path: '/Users/chris/dev-freg', service: 'freg-frontend' },
+  'freg-react': { path: '/Users/chris/dev-freg', service: 'freg-react-frontend' },
+  'freg-api': { path: '/Users/chris/dev-freg', service: 'freg-api' },
+  'freg-db': { path: '/Users/chris/dev-freg', service: 'freg-db' },
+  'family-tree-react': { path: '/Users/chris/dev-familytree', service: 'family-tree-react-frontend' },
+  'family-tree-api-java': { path: '/Users/chris/dev-familytree', service: 'family-tree-api-java' },
+  'family-tree-api-node': { path: '/Users/chris/dev-familytree', service: 'family-tree-api-node' },
+  'family-tree-api-quarkus': { path: '/Users/chris/dev-familytree', service: 'family-tree-api-quarkus' },
+  'movies-react': { path: '/Users/chris/dev-movies', service: 'movies-react' },
+  'movies-vue': { path: '/Users/chris/dev-movies', service: 'movies-vue' },
+  'movies-angular': { path: '/Users/chris/dev-movies', service: 'movies-angular' },
+  'movies-wireframe': { path: '/Users/chris/dev-movies', service: 'movies-wireframe' },
+  'movies-api': { path: '/Users/chris/dev-movies', service: 'movies-api' },
+  'movies-db': { path: '/Users/chris/dev-movies', service: 'movies-db' },
+  'imdb-db': { path: '/Users/chris/dev-movies', service: 'imdb-db' },
+  'ccpay-bubble': { path: '/Users/chris/dev-feepay', service: 'ccpay-bubble' },
+};
+
+// Docker stack configuration - entire projects
+// Using container name prefixes to identify stacks since we can't access host filesystem
+const DOCKER_STACKS = {
+  'vote': {
+    name: 'Vote',
+    containers: ['vote-ui', 'vote-ui-vue', 'vote-ui-react', 'vote-ui-angular', 'vote-api', 'vote-db']
+  },
+  'freg': {
+    name: 'Freg',
+    containers: ['freg-frontend', 'freg-react-frontend', 'freg-api', 'freg-db']
+  },
+  'family-tree': {
+    name: 'Family Tree',
+    containers: ['family-tree-react-frontend', 'family-tree-api-java', 'family-tree-api-node', 'family-tree-api-quarkus', 'family-tree-db', 'family-tree-svg']
+  },
+  'movies': {
+    name: 'Movies',
+    containers: ['movies-react', 'movies-vue', 'movies-angular', 'movies-wireframe', 'movies-api', 'movies-db', 'imdb-db']
+  },
+  'feepay': {
+    name: 'Fee & Pay',
+    containers: ['ccpay-bubble', 'ccpay-payment-api', 'ccpay-db', 'rse-idam-simulator', 'ccd-api-mock', 's2s-mock', 'rabbitmq']
+  },
+};
+
+// Get service status
+app.get('/api/service/:serviceId/status', async (req, res) => {
+  try {
+    const serviceConfig = DOCKER_SERVICES[req.params.serviceId];
+    if (!serviceConfig) {
+      return res.status(404).json({ error: 'Service not found' });
+    }
+
+    const { stdout } = await execAsync(`docker ps --filter "name=${serviceConfig.service}" --format "{{.Names}}"`);
+    const isRunning = stdout.trim().length > 0;
+
+    res.json({ running: isRunning, service: serviceConfig.service });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Toggle service (start/stop)
+app.post('/api/service/:serviceId/toggle', async (req, res) => {
+  try {
+    const serviceConfig = DOCKER_SERVICES[req.params.serviceId];
+    if (!serviceConfig) {
+      return res.status(404).json({ error: 'Service not found' });
+    }
+
+    // Check current status
+    const { stdout: statusOutput } = await execAsync(`docker ps --filter "name=${serviceConfig.service}" --format "{{.Names}}"`);
+    const isRunning = statusOutput.trim().length > 0;
+
+    let command;
+    if (isRunning) {
+      // Stop the service
+      command = `cd ${serviceConfig.path} && docker-compose stop ${serviceConfig.service}`;
+    } else {
+      // Start the service
+      command = `cd ${serviceConfig.path} && docker-compose up -d ${serviceConfig.service}`;
+    }
+
+    const { stdout, stderr } = await execAsync(command);
+    const newStatus = !isRunning;
+
+    res.json({
+      success: true,
+      running: newStatus,
+      message: newStatus ? 'Service started' : 'Service stopped',
+      service: serviceConfig.service,
+      output: stdout || stderr
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message, stderr: error.stderr });
+  }
+});
+
+// Get stack status (all services in a project)
+app.get('/api/stack/:stackId/status', async (req, res) => {
+  try {
+    const stackConfig = DOCKER_STACKS[req.params.stackId];
+    if (!stackConfig) {
+      return res.status(404).json({ error: 'Stack not found' });
+    }
+
+    // Check which containers are running
+    let runningCount = 0;
+    for (const containerName of stackConfig.containers) {
+      try {
+        const { stdout } = await execAsync(`docker ps --filter "name=${containerName}" --format "{{.Names}}"`);
+        if (stdout.trim().length > 0) {
+          runningCount++;
+        }
+      } catch (error) {
+        // Container doesn't exist or not running, continue
+      }
+    }
+
+    res.json({
+      running: runningCount > 0,
+      services: stackConfig.containers,
+      runningCount: runningCount,
+      totalCount: stackConfig.containers.length
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Toggle stack (start/stop all services)
+app.post('/api/stack/:stackId/toggle', async (req, res) => {
+  try {
+    const stackConfig = DOCKER_STACKS[req.params.stackId];
+    if (!stackConfig) {
+      return res.status(404).json({ error: 'Stack not found' });
+    }
+
+    // Check how many containers are currently running
+    let runningCount = 0;
+    for (const containerName of stackConfig.containers) {
+      try {
+        const { stdout } = await execAsync(`docker ps --filter "name=${containerName}" --format "{{.Names}}"`);
+        if (stdout.trim().length > 0) {
+          runningCount++;
+        }
+      } catch (error) {
+        // Continue
+      }
+    }
+
+    const isRunning = runningCount > 0;
+    const results = [];
+
+    if (isRunning) {
+      // Stop all containers in the stack
+      for (const containerName of stackConfig.containers) {
+        try {
+          await execAsync(`docker stop ${containerName}`, { timeout: 30000 });
+          results.push(`Stopped ${containerName}`);
+        } catch (error) {
+          // Container might not exist or already stopped
+          results.push(`${containerName}: ${error.message}`);
+        }
+      }
+    } else {
+      // Start all containers in the stack
+      for (const containerName of stackConfig.containers) {
+        try {
+          // Check if container exists
+          const { stdout: existsOutput } = await execAsync(`docker ps -a --filter "name=${containerName}" --format "{{.Names}}"`);
+          if (existsOutput.trim().length > 0) {
+            await execAsync(`docker start ${containerName}`, { timeout: 30000 });
+            results.push(`Started ${containerName}`);
+          } else {
+            results.push(`${containerName}: Container does not exist`);
+          }
+        } catch (error) {
+          results.push(`${containerName}: ${error.message}`);
+        }
+      }
+    }
+
+    const newStatus = !isRunning;
+
+    res.json({
+      success: true,
+      running: newStatus,
+      message: newStatus ? `All ${stackConfig.name} services started` : `All ${stackConfig.name} services stopped`,
+      stack: req.params.stackId,
+      output: results.join('\n')
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message, stderr: error.stderr });
+  }
 });
 
 app.listen(PORT, () => {

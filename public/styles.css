@@ -93,7 +93,84 @@ pre {
   color: #dc3545;
 }
 
+.health-orange {
+  color: #ff8c00;
+}
+
 .health-dot {
   font-size: 1.2em;
   margin-right: 3px;
+}
+
+/* Stack Status Indicator */
+.stack-status-dot {
+  font-size: 1.5em;
+  margin-left: 10px;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+/* Service Status Indicator (individual services) */
+.service-status-dot {
+  font-size: 1.2em;
+  display: inline-block;
+  transition: color 0.3s ease;
+  min-width: 20px;
+}
+
+.stack-status-starting {
+  color: #ff8c00;
+  animation: flash 1s infinite;
+}
+
+.stack-status-running {
+  color: #28a745;
+}
+
+.stack-status-stopped {
+  color: #dc3545;
+}
+
+.stack-status-partial {
+  color: #ffc107;
+}
+
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Service Toggle Switches */
+.service-toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.service-toggle {
+    width: 50px;
+    height: 24px;
+}
+
+.service-online {
+    color: #28a745;
+    font-weight: 500;
+}
+
+.service-offline {
+    color: #6c757d;
+}
+
+.service-loading {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.form-switch .form-check-input {
+    cursor: pointer;
+}
+
+.form-switch .form-check-input:disabled {
+    cursor: not-allowed;
 }

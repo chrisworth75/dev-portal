@@ -15,91 +15,659 @@
     </nav>
 
     <div class="container mt-5">
-        <div class="row">
-            <!-- Applications Section -->
-            <div class="col-md-6 mb-4">
-                <div class="card">
-                    <div class="card-header bg-primary text-white">
-                        <h3 class="mb-0">Applications</h3>
+        <!-- Project Tabs -->
+        <ul class="nav nav-tabs" id="projectTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="freg-tab" data-bs-toggle="tab" data-bs-target="#freg" type="button" role="tab">
+                    Freg
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="family-tree-tab" data-bs-toggle="tab" data-bs-target="#family-tree" type="button" role="tab">
+                    Family Tree
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="fee-pay-tab" data-bs-toggle="tab" data-bs-target="#fee-pay" type="button" role="tab">
+                    Fee & Pay (CCPAY)
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="movies-tab" data-bs-toggle="tab" data-bs-target="#movies" type="button" role="tab">
+                    Movies
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="vote-tab" data-bs-toggle="tab" data-bs-target="#vote" type="button" role="tab">
+                    Vote
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="projectTabsContent">
+            <!-- FREG Tab -->
+            <div class="tab-pane fade show active" id="freg" role="tabpanel">
+                <!-- Stack Control -->
+                <div class="row mt-3">
+                    <div class="col-12 mb-3">
+                        <div class="card border-primary">
+                            <div class="card-body">
+                                <div class="d-flex w-100 justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h4 class="mb-1">Freg Stack Control</h4>
+                                            <p class="mb-0 text-muted">Start/stop all Freg services (Angular + React + API + DB)</p>
+                                        </div>
+                                        <span class="stack-status-dot stack-status-stopped" data-stack-id="freg">●</span>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input stack-toggle" type="checkbox" data-stack-id="freg" onchange="toggleStack('freg', this)" style="width: 60px; height: 30px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div class="list-group">
-                            <a href="http://localhost:4201" target="_blank" class="list-group-item list-group-item-action">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Chris Freg React</h5>
-                                    <small>:4201</small>
+                </div>
+                <div class="row mt-3">
+                    <!-- Freg Applications -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h3 class="mb-0">Applications</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group">
+                                    <a href="http://localhost:4201" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Chris Freg React</h5>
+                                            <small>:4201</small>
+                                        </div>
+                                        <p class="mb-1">React fees register application</p>
+                                    </a>
+                                    <a href="http://localhost:4200" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Chris Freg Angular</h5>
+                                            <small>:4200</small>
+                                        </div>
+                                        <p class="mb-1">Angular fees register application</p>
+                                    </a>
                                 </div>
-                                <p class="mb-1">React fees register application</p>
-                            </a>
-                            <a href="http://localhost:4200" target="_blank" class="list-group-item list-group-item-action">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Chris Freg Angular</h5>
-                                    <small>:4200</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Freg APIs -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <h3 class="mb-0">APIs</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group">
+                                    <a href="http://localhost:5100/health" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Chris Freg API</h5>
+                                            <small class="health-indicator" data-url="http://localhost:5100/health">:5100</small>
+                                        </div>
+                                        <p class="mb-1">Fees register API</p>
+                                    </a>
                                 </div>
-                                <p class="mb-1">Angular fees register application</p>
-                            </a>
-                            <a href="http://localhost:4202" target="_blank" class="list-group-item list-group-item-action">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Family Tree React</h5>
-                                    <small>:4202</small>
-                                </div>
-                                <p class="mb-1">React family tree viewer application</p>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- APIs Section -->
-            <div class="col-md-6 mb-4">
-                <div class="card">
-                    <div class="card-header bg-success text-white">
-                        <h3 class="mb-0">APIs</h3>
+            <!-- FAMILY TREE Tab -->
+            <div class="tab-pane fade" id="family-tree" role="tabpanel">
+                <!-- Stack Control -->
+                <div class="row mt-3">
+                    <div class="col-12 mb-3">
+                        <div class="card border-primary">
+                            <div class="card-body">
+                                <div class="d-flex w-100 justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h4 class="mb-1">Family Tree Stack Control</h4>
+                                            <p class="mb-0 text-muted">Start/stop all Family Tree services (React + APIs + DBs)</p>
+                                        </div>
+                                        <span class="stack-status-dot stack-status-stopped" data-stack-id="family-tree">●</span>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input stack-toggle" type="checkbox" data-stack-id="family-tree" onchange="toggleStack('family-tree', this)" style="width: 60px; height: 30px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div class="list-group">
-                            <a href="http://localhost:5100/health" target="_blank" class="list-group-item list-group-item-action">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Chris Freg API</h5>
-                                    <small class="health-indicator" data-url="http://localhost:5100/health">:5100</small>
+                </div>
+                <div class="row mt-3">
+                    <!-- Family Tree Applications -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h3 class="mb-0">Applications</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group">
+                                    <a href="http://localhost:4202" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Family Tree React</h5>
+                                            <small>:4202</small>
+                                        </div>
+                                        <p class="mb-1">React family tree viewer application</p>
+                                    </a>
                                 </div>
-                                <p class="mb-1">Fees register API</p>
-                            </a>
-                            <a href="http://localhost:3200/health" target="_blank" class="list-group-item list-group-item-action">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Family Tree API (Java)</h5>
-                                    <small class="health-indicator" data-url="http://localhost:3200/health">:3200</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Family Tree APIs -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <h3 class="mb-0">APIs</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group">
+                                    <a href="http://localhost:3200/health" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Family Tree API (Java)</h5>
+                                            <small class="health-indicator" data-url="http://localhost:3200/health">:3200</small>
+                                        </div>
+                                        <p class="mb-1">Spring Boot family tree API</p>
+                                    </a>
+                                    <a href="http://localhost:3300/health" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Family Tree API (Quarkus)</h5>
+                                            <small class="health-indicator" data-url="http://localhost:3300/health">:3300</small>
+                                        </div>
+                                        <p class="mb-1">Quarkus family tree API</p>
+                                    </a>
+                                    <a href="http://localhost:3100/health" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Family Tree API (Node)</h5>
+                                            <small class="health-indicator" data-url="http://localhost:3100/health">:3100</small>
+                                        </div>
+                                        <p class="mb-1">Node.js/Express family tree API</p>
+                                    </a>
+                                    <a href="http://localhost:3001/health" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Tree SVG API</h5>
+                                            <small class="health-indicator" data-url="http://localhost:3001/health">:3001</small>
+                                        </div>
+                                        <p class="mb-1">Family tree SVG generation API</p>
+                                    </a>
                                 </div>
-                                <p class="mb-1">Spring Boot family tree API</p>
-                            </a>
-                            <a href="http://localhost:3300/health" target="_blank" class="list-group-item list-group-item-action">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Family Tree API (Quarkus)</h5>
-                                    <small class="health-indicator" data-url="http://localhost:3300/health">:3300</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FEE & PAY (CCPAY) Tab -->
+            <div class="tab-pane fade" id="fee-pay" role="tabpanel">
+                <!-- Stack Control -->
+                <div class="row mt-3">
+                    <div class="col-12 mb-3">
+                        <div class="card border-primary">
+                            <div class="card-body">
+                                <div class="d-flex w-100 justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h4 class="mb-1">Fee & Pay Stack Control</h4>
+                                            <p class="mb-0 text-muted">Start/stop all Fee & Pay services (Frontend + APIs + DBs + RabbitMQ)</p>
+                                        </div>
+                                        <span class="stack-status-dot stack-status-stopped" data-stack-id="feepay">●</span>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input stack-toggle" type="checkbox" data-stack-id="feepay" onchange="toggleStack('feepay', this)" style="width: 60px; height: 30px;">
+                                    </div>
                                 </div>
-                                <p class="mb-1">Quarkus family tree API</p>
-                            </a>
-                            <a href="http://localhost:3100/health" target="_blank" class="list-group-item list-group-item-action">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Family Tree API (Node)</h5>
-                                    <small class="health-indicator" data-url="http://localhost:3100/health">:3100</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <!-- Fee & Pay Applications -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h3 class="mb-0">Applications</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group">
+                                    <a href="http://localhost:3000" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">CCPAY Bubble (Frontend)</h5>
+                                            <small class="health-indicator" data-url="http://localhost:3000/health">:3000</small>
+                                        </div>
+                                        <p class="mb-1">Angular payment frontend application</p>
+                                    </a>
                                 </div>
-                                <p class="mb-1">Node.js/Express family tree API</p>
-                            </a>
-                            <a href="http://localhost:3001/health" target="_blank" class="list-group-item list-group-item-action">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Tree SVG API</h5>
-                                    <small class="health-indicator" data-url="http://localhost:3001/health">:3001</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fee & Pay APIs -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <h3 class="mb-0">APIs & Services</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group">
+                                    <a href="http://localhost:8080/health" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">CCPAY Payment API (Java)</h5>
+                                            <small class="health-indicator" data-url="http://localhost:8080/health">:8080</small>
+                                        </div>
+                                        <p class="mb-1">Spring Boot payment API</p>
+                                    </a>
+                                    <a href="http://localhost:5556/health" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">RSE IDAM Simulator</h5>
+                                            <small class="health-indicator" data-url="http://localhost:5556/health">:5556</small>
+                                        </div>
+                                        <p class="mb-1">IDAM authentication simulator</p>
+                                    </a>
+                                    <a href="http://localhost:4452/health" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">CCD API Mock (Node)</h5>
+                                            <small class="health-indicator" data-url="http://localhost:4452/health">:4452</small>
+                                        </div>
+                                        <p class="mb-1">Case data API mock</p>
+                                    </a>
+                                    <a href="http://localhost:8489/health" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">S2S Mock</h5>
+                                            <small class="health-indicator" data-url="http://localhost:8489/health">:8489</small>
+                                        </div>
+                                        <p class="mb-1">Service-to-service auth mock</p>
+                                    </a>
+                                    <a href="http://localhost:15672" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">RabbitMQ Management</h5>
+                                            <small>:15672</small>
+                                        </div>
+                                        <p class="mb-1">Message broker (admin/admin)</p>
+                                    </a>
                                 </div>
-                                <p class="mb-1">Family tree SVG generation API</p>
-                            </a>
-                            <a href="http://localhost:5556/health" target="_blank" class="list-group-item list-group-item-action">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">RSE IDAM Simulator</h5>
-                                    <small class="health-indicator" data-url="http://localhost:5556/health">:5556</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- E2E Credentials -->
+                    <div class="col-12 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-warning text-dark">
+                                <h3 class="mb-0">E2E Test Credentials</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-2"><strong>All test users password:</strong> <code>Monday01</code></p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5>Test Users:</h5>
+                                        <ul class="list-unstyled">
+                                            <li><code>probatedraftcasecreator@mailinator.com</code> - Probate caseworker</li>
+                                            <li><code>refundsapprover@mailinator.com</code> - Refunds approver</li>
+                                            <li><code>divorcecaseworker@mailinator.com</code> - Divorce caseworker</li>
+                                            <li><code>cmccaseworker@mailinator.com</code> - CMC caseworker</li>
+                                            <li><code>paymentscaseworker@mailinator.com</code> - General payments</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Database:</h5>
+                                        <ul class="list-unstyled">
+                                            <li><strong>Host:</strong> localhost:5446</li>
+                                            <li><strong>Database:</strong> payments</li>
+                                            <li><strong>User:</strong> postgres</li>
+                                            <li><strong>Password:</strong> postgres</li>
+                                        </ul>
+                                        <p class="mt-2">
+                                            <a href="/CCPAY-E2E-CREDENTIALS.md" target="_blank" class="btn btn-sm btn-info">
+                                                View Full Credentials
+                                            </a>
+                                        </p>
+                                    </div>
                                 </div>
-                                <p class="mb-1">IDAM authentication simulator</p>
-                            </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MOVIES Tab -->
+            <div class="tab-pane fade" id="movies" role="tabpanel">
+                <!-- Stack Control -->
+                <div class="row mt-3">
+                    <div class="col-12 mb-3">
+                        <div class="card border-primary">
+                            <div class="card-body">
+                                <div class="d-flex w-100 justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h4 class="mb-1">Movies Stack Control</h4>
+                                            <p class="mb-0 text-muted">Start/stop all Movies services (All UIs + API + DBs)</p>
+                                        </div>
+                                        <span class="stack-status-dot stack-status-stopped" data-stack-id="movies">●</span>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input stack-toggle" type="checkbox" data-stack-id="movies" onchange="toggleStack('movies', this)" style="width: 60px; height: 30px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <!-- Movies Applications -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h3 class="mb-0">Applications</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group">
+                                    <a href="http://localhost:4206" target="_blank" class="list-group-item list-group-item-action active">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">🎨 Movies Wireframe (DEV ENVIRONMENT)</h5>
+                                            <small class="health-indicator" data-url="http://localhost:4206">:4206</small>
+                                        </div>
+                                        <p class="mb-1"><strong>START HERE!</strong> Vanilla JS wireframe for rapid feature development - featuring "Bark to the Future" 🐕</p>
+                                    </a>
+                                    <a href="http://localhost:4205" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Movies Vue (Production)</h5>
+                                            <small class="health-indicator" data-url="http://localhost:4205">:4205</small>
+                                        </div>
+                                        <p class="mb-1">Production frontend with real API integration (Vue 3)</p>
+                                    </a>
+                                    <a href="http://localhost:4203" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Movies React</h5>
+                                            <small class="health-indicator" data-url="http://localhost:4203">:4203</small>
+                                        </div>
+                                        <p class="mb-1">Alternative frontend implementation (React 18)</p>
+                                    </a>
+                                    <a href="http://localhost:4204" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Movies Angular</h5>
+                                            <small class="health-indicator" data-url="http://localhost:4204">:4204</small>
+                                        </div>
+                                        <p class="mb-1">Alternative frontend implementation (Angular 17)</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Movies APIs & Databases -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <h3 class="mb-0">APIs & Databases</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group">
+                                    <a href="http://localhost:3400/actuator/health" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Movies API</h5>
+                                            <small class="health-indicator" data-url="http://localhost:3400/actuator/health">:3400</small>
+                                        </div>
+                                        <p class="mb-1">Spring Boot recommendation API</p>
+                                    </a>
+                                    <div class="list-group-item">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Movies DB</h5>
+                                            <small>:5448</small>
+                                        </div>
+                                        <p class="mb-1">PostgreSQL - User data (watchlist, ratings, preferences)</p>
+                                        <small class="text-muted">Host: localhost | DB: movies | User: movies</small>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">IMDB DB</h5>
+                                            <small>:5450</small>
+                                        </div>
+                                        <p class="mb-1">PostgreSQL - IMDB reference data (542K movies, 14.8M people)</p>
+                                        <small class="text-muted">Host: localhost | DB: imdb | User: imdb</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Movies System Info -->
+                    <div class="col-12 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-warning text-dark">
+                                <h3 class="mb-0">System Information</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5>Recommendation System:</h5>
+                                        <ul class="list-unstyled">
+                                            <li><strong>Algorithm:</strong> Hybrid content-based filtering</li>
+                                            <li><strong>Key Weights:</strong> Actor (10.0), Director (5.0), Genre (2.0), IMDB (3.0)</li>
+                                            <li><strong>Filters:</strong> Movies ≥1950, Rating ≥6.0, Votes ≥1000</li>
+                                            <li><strong>Dataset:</strong> ~542,500 quality movies</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Quick Links:</h5>
+                                        <ul class="list-unstyled">
+                                            <li><a href="https://github.com/chrisworth75/imdb-data" target="_blank" class="btn btn-sm btn-outline-primary">IMDB Data Repo</a></li>
+                                            <li><a href="https://github.com/chrisworth75/movies-api" target="_blank" class="btn btn-sm btn-outline-primary mt-1">Movies API Repo</a></li>
+                                            <li><a href="https://github.com/chrisworth75/movies-db" target="_blank" class="btn btn-sm btn-outline-primary mt-1">Movies DB Repo</a></li>
+                                            <li><a href="https://github.com/chrisworth75/movies-react" target="_blank" class="btn btn-sm btn-outline-primary mt-1">Movies React Repo</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VOTE Tab -->
+            <div class="tab-pane fade" id="vote" role="tabpanel">
+                <!-- Stack Control -->
+                <div class="row mt-3">
+                    <div class="col-12 mb-3">
+                        <div class="card border-primary">
+                            <div class="card-body">
+                                <div class="d-flex w-100 justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h4 class="mb-1">Vote Stack Control</h4>
+                                            <p class="mb-0 text-muted">Start/stop all Vote services (UIs + API + DB)</p>
+                                        </div>
+                                        <span class="stack-status-dot stack-status-stopped" data-stack-id="vote">●</span>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input stack-toggle" type="checkbox" data-stack-id="vote" onchange="toggleStack('vote', this)" style="width: 60px; height: 30px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <!-- Vote Applications -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h3 class="mb-0">Applications</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group">
+                                    <a href="http://localhost:3005" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between align-items-center">
+                                            <div class="flex-grow-1">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="service-status-dot stack-status-stopped" data-service-name="vote-ui">●</span>
+                                                    <div class="ms-2">
+                                                        <h5 class="mb-1">Vote UI (Vanilla JS)</h5>
+                                                        <p class="mb-1">Original vanilla JS voting application with D3.js pie charts</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <small class="health-indicator" data-url="http://localhost:3005">:3005</small>
+                                                <div class="form-check form-switch" onclick="event.preventDefault(); event.stopPropagation();">
+                                                    <input class="form-check-input service-toggle" type="checkbox" data-service-id="vote-ui" onchange="toggleService('vote-ui', this)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="http://localhost:5173" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between align-items-center">
+                                            <div class="flex-grow-1">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="service-status-dot stack-status-stopped" data-service-name="vote-ui-vue">●</span>
+                                                    <div class="ms-2">
+                                                        <h5 class="mb-1">Vote UI Vue</h5>
+                                                        <p class="mb-1">Vue 3 voting application with reactive D3.js charts</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <small class="health-indicator" data-url="http://localhost:5173">:5173</small>
+                                                <div class="form-check form-switch" onclick="event.preventDefault(); event.stopPropagation();">
+                                                    <input class="form-check-input service-toggle" type="checkbox" data-service-id="vote-ui-vue" onchange="toggleService('vote-ui-vue', this)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="http://localhost:3006" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between align-items-center">
+                                            <div class="flex-grow-1">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="service-status-dot stack-status-stopped" data-service-name="vote-ui-react">●</span>
+                                                    <div class="ms-2">
+                                                        <h5 class="mb-1">Vote UI React</h5>
+                                                        <p class="mb-1">React 18 voting application with TypeScript and D3.js</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <small class="health-indicator" data-url="http://localhost:3006">:3006</small>
+                                                <div class="form-check form-switch" onclick="event.preventDefault(); event.stopPropagation();">
+                                                    <input class="form-check-input service-toggle" type="checkbox" data-service-id="vote-ui-react" onchange="toggleService('vote-ui-react', this)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="http://localhost:4207" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between align-items-center">
+                                            <div class="flex-grow-1">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="service-status-dot stack-status-stopped" data-service-name="vote-ui-angular">●</span>
+                                                    <div class="ms-2">
+                                                        <h5 class="mb-1">Vote UI Angular</h5>
+                                                        <p class="mb-1">Angular 20 voting application with RxJS and D3.js</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <small class="health-indicator" data-url="http://localhost:4207">:4207</small>
+                                                <div class="form-check form-switch" onclick="event.preventDefault(); event.stopPropagation();">
+                                                    <input class="form-check-input service-toggle" type="checkbox" data-service-id="vote-ui-angular" onchange="toggleService('vote-ui-angular', this)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vote API & Database -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <h3 class="mb-0">API & Database</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group">
+                                    <a href="http://localhost:8085/api/polls" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between align-items-center">
+                                            <div class="flex-grow-1">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="service-status-dot stack-status-stopped" data-service-name="vote-api">●</span>
+                                                    <div class="ms-2">
+                                                        <h5 class="mb-1">Vote API</h5>
+                                                        <p class="mb-1">Spring Boot REST API for voting</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <small class="health-indicator" data-url="http://localhost:8085/api/polls">:8085</small>
+                                        </div>
+                                    </a>
+                                    <div class="list-group-item">
+                                        <div class="d-flex w-100 justify-content-between align-items-center">
+                                            <div class="flex-grow-1">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="service-status-dot stack-status-stopped" data-service-name="vote-db">●</span>
+                                                    <div class="ms-2">
+                                                        <h5 class="mb-1">Vote DB</h5>
+                                                        <p class="mb-1">PostgreSQL - Users, polls, and votes data</p>
+                                                        <small class="text-muted">Host: localhost | DB: votedb | User: postgres</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <small>:5435</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vote System Info -->
+                    <div class="col-12 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-warning text-dark">
+                                <h3 class="mb-0">System Information</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h5>Features:</h5>
+                                        <ul class="list-unstyled">
+                                            <li><strong>Authentication:</strong> RSE IDAM Simulator</li>
+                                            <li><strong>Voting:</strong> One vote per user per poll (can be changed)</li>
+                                            <li><strong>Visualization:</strong> D3.js pie charts for real-time results</li>
+                                            <li><strong>Auto-refresh:</strong> Results update every 3 seconds</li>
+                                            <li><strong>Sample Polls:</strong> 4 pre-loaded polls</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h5>Test Accounts:</h5>
+                                        <ul class="list-unstyled">
+                                            <li><code>alice@example.com</code> / <code>password</code></li>
+                                            <li><code>bob@example.com</code> / <code>password</code></li>
+                                        </ul>
+                                        <h5 class="mt-3">Frameworks:</h5>
+                                        <ul class="list-unstyled">
+                                            <li>Vanilla JS (port 3005)</li>
+                                            <li>Vue 3 + Pinia (port 5173)</li>
+                                            <li>React 18 + Context (port 3006)</li>
+                                            <li>Angular 20 + RxJS (port 4207)</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h5>Quick Links:</h5>
+                                        <ul class="list-unstyled">
+                                            <li><a href="https://github.com/chrisworth75/vote-db" target="_blank" class="btn btn-sm btn-outline-primary">Vote DB Repo</a></li>
+                                            <li><a href="https://github.com/chrisworth75/vote-api" target="_blank" class="btn btn-sm btn-outline-primary mt-1">Vote API Repo</a></li>
+                                            <li><a href="https://github.com/chrisworth75/vote-ui" target="_blank" class="btn btn-sm btn-outline-primary mt-1">Vote UI Repo</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
