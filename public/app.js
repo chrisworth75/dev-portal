@@ -185,10 +185,82 @@ function restoreActiveTab() {
     }
 }
 
+// Service branch indicators functionality
+async function loadServiceBranches() {
+    try {
+        // Get all service branch badges
+        const serviceBadges = document.querySelectorAll('[data-service-branch]');
+
+        // Fetch branch for each service
+        const promises = Array.from(serviceBadges).map(async (badge) => {
+            const serviceId = badge.getAttribute('data-service-branch');
+            try {
+                const response = await fetch(`/api/service/${serviceId}/branch`);
+                const data = await response.json();
+                const branch = data.branch || 'unknown';
+
+                badge.textContent = branch;
+
+                // Color code branches
+                badge.classList.remove('bg-primary', 'bg-success', 'bg-warning', 'bg-danger', 'bg-secondary');
+                if (branch === 'main' || branch === 'master') {
+                    badge.classList.add('bg-success');
+                } else if (branch === 'claude') {
+                    badge.classList.add('bg-primary');
+                } else if (branch === 'not a repo' || branch === 'unknown') {
+                    badge.classList.add('bg-danger');
+                } else {
+                    badge.classList.add('bg-warning');
+                }
+            } catch (error) {
+                badge.textContent = 'error';
+                badge.classList.remove('bg-primary', 'bg-success', 'bg-warning', 'bg-secondary');
+                badge.classList.add('bg-danger');
+            }
+        });
+
+        await Promise.all(promises);
+    } catch (error) {
+        console.error('Error loading service branches:', error);
+    }
+}
+
+// Branch indicators functionality (for project tabs - legacy)
+async function loadGitBranches() {
+    try {
+        const response = await fetch('/api/git/branches');
+        const branches = await response.json();
+
+        // Update branch badges for each project
+        Object.entries(branches).forEach(([projectId, branch]) => {
+            const branchBadge = document.querySelector(`[data-project-branch="${projectId}"]`);
+            if (branchBadge) {
+                branchBadge.textContent = branch;
+
+                // Color code branches
+                branchBadge.classList.remove('bg-primary', 'bg-success', 'bg-warning', 'bg-danger');
+                if (branch === 'main' || branch === 'master') {
+                    branchBadge.classList.add('bg-success');
+                } else if (branch === 'claude') {
+                    branchBadge.classList.add('bg-primary');
+                } else if (branch === 'error' || branch === 'unknown') {
+                    branchBadge.classList.add('bg-danger');
+                } else {
+                    branchBadge.classList.add('bg-warning');
+                }
+            }
+        });
+    } catch (error) {
+        console.error('Error loading git branches:', error);
+    }
+}
+
 // Load documentation on page load
 document.addEventListener('DOMContentLoaded', () => {
     loadAPIDocumentation();
     updateHealthIndicators();
+    loadGitBranches();
+    loadServiceBranches();
 
     // Restore active tab
     restoreActiveTab();
@@ -206,6 +278,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Refresh health indicators every 30 seconds
     setInterval(updateHealthIndicators, 30000);
+
+    // Refresh branch indicators every 60 seconds
+    setInterval(loadGitBranches, 60000);
+    setInterval(loadServiceBranches, 60000);
 
     // Initialize service toggles
     initializeServiceToggles();

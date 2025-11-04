@@ -38,30 +38,40 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', port: PORT });
 });
 
+// Project paths for git branch checking
+const PROJECT_PATHS = {
+  'vote': '/projects/vote',
+  'freg': '/projects/freg',
+  'family-tree': '/projects/family-tree',
+  'movies': '/projects/movies',
+  'feepay': '/projects/feepay'
+};
+
 // Docker service configuration - individual services
+// Maps service IDs to their docker-compose paths and individual service repo paths for git branch checking
 const DOCKER_SERVICES = {
-  'vote-ui': { path: '/Users/chris/dev-vote', service: 'vote-ui' },
-  'vote-ui-vue': { path: '/Users/chris/dev-vote', service: 'vote-ui-vue' },
-  'vote-ui-react': { path: '/Users/chris/dev-vote', service: 'vote-ui-react' },
-  'vote-ui-angular': { path: '/Users/chris/dev-vote', service: 'vote-ui-angular' },
-  'vote-api': { path: '/Users/chris/dev-vote', service: 'vote-api' },
-  'vote-db': { path: '/Users/chris/dev-vote', service: 'vote-db' },
-  'freg-angular': { path: '/Users/chris/dev-freg', service: 'freg-frontend' },
-  'freg-react': { path: '/Users/chris/dev-freg', service: 'freg-react-frontend' },
-  'freg-api': { path: '/Users/chris/dev-freg', service: 'freg-api' },
-  'freg-db': { path: '/Users/chris/dev-freg', service: 'freg-db' },
-  'family-tree-react': { path: '/Users/chris/dev-familytree', service: 'family-tree-react-frontend' },
-  'family-tree-api-java': { path: '/Users/chris/dev-familytree', service: 'family-tree-api-java' },
-  'family-tree-api-node': { path: '/Users/chris/dev-familytree', service: 'family-tree-api-node' },
-  'family-tree-api-quarkus': { path: '/Users/chris/dev-familytree', service: 'family-tree-api-quarkus' },
-  'movies-react': { path: '/Users/chris/dev-movies', service: 'movies-react' },
-  'movies-vue': { path: '/Users/chris/dev-movies', service: 'movies-vue' },
-  'movies-angular': { path: '/Users/chris/dev-movies', service: 'movies-angular' },
-  'movies-wireframe': { path: '/Users/chris/dev-movies', service: 'movies-wireframe' },
-  'movies-api': { path: '/Users/chris/dev-movies', service: 'movies-api' },
-  'movies-db': { path: '/Users/chris/dev-movies', service: 'movies-db' },
-  'imdb-db': { path: '/Users/chris/dev-movies', service: 'imdb-db' },
-  'ccpay-bubble': { path: '/Users/chris/dev-feepay', service: 'ccpay-bubble' },
+  'vote-ui': { path: '/Users/chris/dev-vote', service: 'vote-ui', projectPath: '/projects/vote/vote-ui' },
+  'vote-ui-vue': { path: '/Users/chris/dev-vote', service: 'vote-ui-vue', projectPath: '/projects/vote/vote-ui-vue' },
+  'vote-ui-react': { path: '/Users/chris/dev-vote', service: 'vote-ui-react', projectPath: '/projects/vote/vote-ui-react' },
+  'vote-ui-angular': { path: '/Users/chris/dev-vote', service: 'vote-ui-angular', projectPath: '/projects/vote/vote-ui-angular' },
+  'vote-api': { path: '/Users/chris/dev-vote', service: 'vote-api', projectPath: '/projects/vote/vote-api' },
+  'vote-db': { path: '/Users/chris/dev-vote', service: 'vote-db', projectPath: '/projects/vote/vote-db' },
+  'freg-angular': { path: '/Users/chris/dev-freg', service: 'freg-frontend', projectPath: '/projects/freg/freg-ang' },
+  'freg-react': { path: '/Users/chris/dev-freg', service: 'freg-react-frontend', projectPath: '/projects/freg/freg-react' },
+  'freg-api': { path: '/Users/chris/dev-freg', service: 'freg-api', projectPath: '/projects/freg/freg-api' },
+  'freg-db': { path: '/Users/chris/dev-freg', service: 'freg-db', projectPath: '/projects/freg' },
+  'family-tree-react': { path: '/Users/chris/dev-familytree', service: 'family-tree-react-frontend', projectPath: '/projects/family-tree/family-tree-react' },
+  'family-tree-api-java': { path: '/Users/chris/dev-familytree', service: 'family-tree-api-java', projectPath: '/projects/family-tree/family-tree-api-java' },
+  'family-tree-api-node': { path: '/Users/chris/dev-familytree', service: 'family-tree-api-node', projectPath: '/projects/family-tree/family-tree-api-node' },
+  'family-tree-api-quarkus': { path: '/Users/chris/dev-familytree', service: 'family-tree-api-quarkus', projectPath: '/projects/family-tree/family-tree-api-quarkus' },
+  'movies-react': { path: '/Users/chris/dev-movies', service: 'movies-react', projectPath: '/projects/movies/movies-react' },
+  'movies-vue': { path: '/Users/chris/dev-movies', service: 'movies-vue', projectPath: '/projects/movies/movies-vue' },
+  'movies-angular': { path: '/Users/chris/dev-movies', service: 'movies-angular', projectPath: '/projects/movies/movies-angular' },
+  'movies-wireframe': { path: '/Users/chris/dev-movies', service: 'movies-wireframe', projectPath: '/projects/movies/movies-wireframe' },
+  'movies-api': { path: '/Users/chris/dev-movies', service: 'movies-api', projectPath: '/projects/movies/movies-api' },
+  'movies-db': { path: '/Users/chris/dev-movies', service: 'movies-db', projectPath: '/projects/movies' },
+  'imdb-db': { path: '/Users/chris/dev-movies', service: 'imdb-db', projectPath: '/projects/movies' },
+  'ccpay-bubble': { path: '/Users/chris/dev-feepay', service: 'ccpay-bubble', projectPath: '/projects/feepay/ccpay-bubble' },
 };
 
 // Docker stack configuration - entire projects
@@ -85,7 +95,7 @@ const DOCKER_STACKS = {
   },
   'feepay': {
     name: 'Fee & Pay',
-    containers: ['ccpay-bubble', 'ccpay-payment-api', 'ccpay-db', 'rse-idam-simulator', 'ccd-api-mock', 's2s-mock', 'rabbitmq']
+    containers: ['ccpay-bubble', 'ccpay-payment-app', 'payments-db', 'rse-idam-simulator-rse-idam-simulator-1', 'ccd-api-mock-node', 's2s-mock', 'local-service-bus']
   },
 };
 
@@ -238,6 +248,61 @@ app.post('/api/stack/:stackId/toggle', async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ error: error.message, stderr: error.stderr });
+  }
+});
+
+// Get git branch for all projects
+app.get('/api/git/branches', async (req, res) => {
+  try {
+    const branches = {};
+
+    for (const [projectId, projectPath] of Object.entries(PROJECT_PATHS)) {
+      try {
+        const { stdout } = await execAsync(`cd ${projectPath} && git branch --show-current`, { timeout: 5000 });
+        branches[projectId] = stdout.trim() || 'unknown';
+      } catch (error) {
+        branches[projectId] = 'error';
+      }
+    }
+
+    res.json(branches);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Get git branch for a specific project
+app.get('/api/git/branch/:projectId', async (req, res) => {
+  try {
+    const projectPath = PROJECT_PATHS[req.params.projectId];
+    if (!projectPath) {
+      return res.status(404).json({ error: 'Project not found' });
+    }
+
+    const { stdout } = await execAsync(`cd ${projectPath} && git branch --show-current`, { timeout: 5000 });
+    const branch = stdout.trim() || 'unknown';
+
+    res.json({ project: req.params.projectId, branch });
+  } catch (error) {
+    res.status(500).json({ error: error.message, branch: 'error' });
+  }
+});
+
+// Get git branch for a specific service
+app.get('/api/service/:serviceId/branch', async (req, res) => {
+  try {
+    const serviceConfig = DOCKER_SERVICES[req.params.serviceId];
+    if (!serviceConfig) {
+      return res.status(404).json({ error: 'Service not found' });
+    }
+
+    const projectPath = serviceConfig.projectPath;
+    const { stdout } = await execAsync(`cd ${projectPath} && git branch --show-current`, { timeout: 5000 });
+    const branch = stdout.trim() || 'unknown';
+
+    res.json({ service: req.params.serviceId, branch });
+  } catch (error) {
+    res.status(500).json({ error: error.message, branch: 'not a repo' });
   }
 });
 
