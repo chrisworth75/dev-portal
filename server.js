@@ -72,6 +72,9 @@ const DOCKER_SERVICES = {
   'movies-db': { path: '/Users/chris/dev-movies', service: 'movies-db', projectPath: '/projects/movies' },
   'imdb-db': { path: '/Users/chris/dev-movies', service: 'imdb-db', projectPath: '/projects/movies' },
   'ccpay-bubble': { path: '/Users/chris/dev-feepay', service: 'ccpay-bubble', projectPath: '/projects/feepay/ccpay-bubble' },
+  'paybubble-ang': { path: '/Users/chris/dev-feepay', service: 'paybubble-ang', projectPath: '/projects/feepay/paybubble-ang' },
+  'paybubble-react': { path: '/Users/chris/dev-feepay', service: 'paybubble-react', projectPath: '/projects/feepay/paybubble-react' },
+  'paybubble-vue': { path: '/Users/chris/dev-feepay', service: 'paybubble-vue', projectPath: '/projects/feepay/paybubble-vue' },
 };
 
 // Docker stack configuration - entire projects
@@ -95,7 +98,7 @@ const DOCKER_STACKS = {
   },
   'feepay': {
     name: 'Fee & Pay',
-    containers: ['ccpay-bubble', 'ccpay-payment-app', 'payments-db', 'rse-idam-simulator-rse-idam-simulator-1', 'ccd-api-mock-node', 's2s-mock', 'local-service-bus']
+    containers: ['ccpay-bubble', 'paybubble-ang', 'paybubble-react', 'paybubble-vue', 'ccpay-payment-app', 'payments-db', 'rse-idam-simulator-rse-idam-simulator-1', 'ccd-api-mock-node', 's2s-mock', 'local-service-bus']
   },
 };
 
