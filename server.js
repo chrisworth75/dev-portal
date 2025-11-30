@@ -40,41 +40,41 @@ app.get('/health', (req, res) => {
 
 // Project paths for git branch checking
 const PROJECT_PATHS = {
-  'vote': '/projects/vote',
-  'freg': '/projects/freg',
-  'family-tree': '/projects/family-tree',
-  'movies': '/projects/movies',
-  'feepay': '/projects/feepay'
+  'vote': '/Users/chris/dev-vote',
+  'freg': '/Users/chris/dev-freg',
+  'family-tree': '/Users/chris/dev-familytree',
+  'movies': '/Users/chris/dev-movies',
+  'feepay': '/Users/chris/dev-feepay'
 };
 
 // Docker service configuration - individual services
 // Maps service IDs to their docker-compose paths and individual service repo paths for git branch checking
 const DOCKER_SERVICES = {
-  'vote-ui': { path: '/Users/chris/dev-vote', service: 'vote-ui', projectPath: '/projects/vote/vote-ui' },
-  'vote-ui-vue': { path: '/Users/chris/dev-vote', service: 'vote-ui-vue', projectPath: '/projects/vote/vote-ui-vue' },
-  'vote-ui-react': { path: '/Users/chris/dev-vote', service: 'vote-ui-react', projectPath: '/projects/vote/vote-ui-react' },
-  'vote-ui-angular': { path: '/Users/chris/dev-vote', service: 'vote-ui-angular', projectPath: '/projects/vote/vote-ui-angular' },
-  'vote-api': { path: '/Users/chris/dev-vote', service: 'vote-api', projectPath: '/projects/vote/vote-api' },
-  'vote-db': { path: '/Users/chris/dev-vote', service: 'vote-db', projectPath: '/projects/vote/vote-db' },
-  'freg-angular': { path: '/Users/chris/dev-freg', service: 'freg-frontend', projectPath: '/projects/freg/freg-ang' },
-  'freg-react': { path: '/Users/chris/dev-freg', service: 'freg-react-frontend', projectPath: '/projects/freg/freg-react' },
-  'freg-api': { path: '/Users/chris/dev-freg', service: 'freg-api', projectPath: '/projects/freg/freg-api' },
-  'freg-db': { path: '/Users/chris/dev-freg', service: 'freg-db', projectPath: '/projects/freg' },
-  'family-tree-react': { path: '/Users/chris/dev-familytree', service: 'family-tree-react-frontend', projectPath: '/projects/family-tree/family-tree-react' },
-  'family-tree-api-java': { path: '/Users/chris/dev-familytree', service: 'family-tree-api-java', projectPath: '/projects/family-tree/family-tree-api-java' },
-  'family-tree-api-node': { path: '/Users/chris/dev-familytree', service: 'family-tree-api-node', projectPath: '/projects/family-tree/family-tree-api-node' },
-  'family-tree-api-quarkus': { path: '/Users/chris/dev-familytree', service: 'family-tree-api-quarkus', projectPath: '/projects/family-tree/family-tree-api-quarkus' },
-  'movies-react': { path: '/Users/chris/dev-movies', service: 'movies-react', projectPath: '/projects/movies/movies-react' },
-  'movies-vue': { path: '/Users/chris/dev-movies', service: 'movies-vue', projectPath: '/projects/movies/movies-vue' },
-  'movies-angular': { path: '/Users/chris/dev-movies', service: 'movies-angular', projectPath: '/projects/movies/movies-angular' },
-  'movies-wireframe': { path: '/Users/chris/dev-movies', service: 'movies-wireframe', projectPath: '/projects/movies/movies-wireframe' },
-  'movies-api': { path: '/Users/chris/dev-movies', service: 'movies-api', projectPath: '/projects/movies/movies-api' },
-  'movies-db': { path: '/Users/chris/dev-movies', service: 'movies-db', projectPath: '/projects/movies' },
-  'imdb-db': { path: '/Users/chris/dev-movies', service: 'imdb-db', projectPath: '/projects/movies' },
-  'ccpay-bubble': { path: '/Users/chris/dev-feepay', service: 'ccpay-bubble', projectPath: '/projects/feepay/ccpay-bubble' },
-  'paybubble-ang': { path: '/Users/chris/dev-feepay', service: 'paybubble-ang', projectPath: '/projects/feepay/paybubble-ang' },
-  'paybubble-react': { path: '/Users/chris/dev-feepay', service: 'paybubble-react', projectPath: '/projects/feepay/paybubble-react' },
-  'paybubble-vue': { path: '/Users/chris/dev-feepay', service: 'paybubble-vue', projectPath: '/projects/feepay/paybubble-vue' },
+  'vote-ui': { path: '/Users/chris/dev-vote', service: 'vote-ui', projectPath: '/Users/chris/dev-vote/vote-ui' },
+  'vote-ui-vue': { path: '/Users/chris/dev-vote', service: 'vote-ui-vue', projectPath: '/Users/chris/dev-vote/vote-ui-vue' },
+  'vote-ui-react': { path: '/Users/chris/dev-vote', service: 'vote-ui-react', projectPath: '/Users/chris/dev-vote/vote-ui-react' },
+  'vote-ui-angular': { path: '/Users/chris/dev-vote', service: 'vote-ui-angular', projectPath: '/Users/chris/dev-vote/vote-ui-angular' },
+  'vote-api': { path: '/Users/chris/dev-vote', service: 'vote-api', projectPath: '/Users/chris/dev-vote/vote-api' },
+  'vote-db': { path: '/Users/chris/dev-vote', service: 'vote-db', projectPath: '/Users/chris/dev-vote/vote-db' },
+  'freg-angular': { path: '/Users/chris/dev-freg', service: 'freg-frontend', projectPath: '/Users/chris/dev-freg/freg-ang' },
+  'freg-react': { path: '/Users/chris/dev-freg', service: 'freg-react-frontend', projectPath: '/Users/chris/dev-freg/freg-react' },
+  'freg-api': { path: '/Users/chris/dev-freg', service: 'freg-api', projectPath: '/Users/chris/dev-freg/freg-api' },
+  'freg-db': { path: '/Users/chris/dev-freg', service: 'freg-db', projectPath: '/Users/chris/dev-freg/freg-db' },
+  'family-tree-react': { path: '/Users/chris/dev-familytree', service: 'family-tree-react-frontend', projectPath: '/Users/chris/dev-familytree/family-tree-react' },
+  'family-tree-api-java': { path: '/Users/chris/dev-familytree', service: 'family-tree-api-java', projectPath: '/Users/chris/dev-familytree/family-tree-api-java' },
+  'family-tree-api-node': { path: '/Users/chris/dev-familytree', service: 'family-tree-api-node', projectPath: '/Users/chris/dev-familytree/family-tree-api-node' },
+  'family-tree-api-quarkus': { path: '/Users/chris/dev-familytree', service: 'family-tree-api-quarkus', projectPath: '/Users/chris/dev-familytree/family-tree-api-quarkus' },
+  'movies-react': { path: '/Users/chris/dev-movies', service: 'movies-react', projectPath: '/Users/chris/dev-movies/movies-react' },
+  'movies-vue': { path: '/Users/chris/dev-movies', service: 'movies-vue', projectPath: '/Users/chris/dev-movies/movies-vue' },
+  'movies-angular': { path: '/Users/chris/dev-movies', service: 'movies-angular', projectPath: '/Users/chris/dev-movies/movies-angular' },
+  'movies-wireframe': { path: '/Users/chris/dev-movies', service: 'movies-wireframe', projectPath: '/Users/chris/dev-movies/movies-wireframe' },
+  'movies-api': { path: '/Users/chris/dev-movies', service: 'movies-api', projectPath: '/Users/chris/dev-movies/movies-api' },
+  'movies-db': { path: '/Users/chris/dev-movies', service: 'movies-db', projectPath: '/Users/chris/dev-movies/movies-db' },
+  'imdb-db': { path: '/Users/chris/dev-movies', service: 'imdb-db', projectPath: '/Users/chris/dev-movies/imdb-db' },
+  'ccpay-bubble': { path: '/Users/chris/dev-feepay', service: 'ccpay-bubble', projectPath: '/Users/chris/dev-feepay/ccpay-bubble' },
+  'paybubble-ang': { path: '/Users/chris/dev-feepay', service: 'paybubble-ang', projectPath: '/Users/chris/dev-feepay/paybubble-ang' },
+  'paybubble-react': { path: '/Users/chris/dev-feepay', service: 'paybubble-react', projectPath: '/Users/chris/dev-feepay/paybubble-react' },
+  'db-tool-spring-boot': { path: '/Users/chris/dev-feepay', service: 'db-tool-spring-boot', projectPath: '/Users/chris/dev-feepay/db-tool-spring-boot' },
 };
 
 // Docker stack configuration - entire projects
@@ -98,7 +98,7 @@ const DOCKER_STACKS = {
   },
   'feepay': {
     name: 'Fee & Pay',
-    containers: ['ccpay-bubble', 'paybubble-ang', 'paybubble-react', 'paybubble-vue', 'ccpay-payment-app', 'payments-db', 'rse-idam-simulator-rse-idam-simulator-1', 'ccd-api-mock-node', 's2s-mock', 'local-service-bus']
+    containers: ['ccpay-bubble', 'paybubble-ang', 'paybubble-react', 'ccpay-payment-app', 'payments-db', 'rse-idam-simulator', 'ccd-api-mock-node', 's2s-mock', 'local-service-bus', 'db-tool-spring-boot']
   },
 };
 
