@@ -15,6 +15,18 @@
     </nav>
 
     <div class="container mt-5">
+        <!-- IDE Integration Info -->
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <h5 class="alert-heading"><strong>🚀 New Feature: Open Projects in IDE</strong></h5>
+            <p class="mb-0">
+                Click the IDE button next to any project to open it directly in your preferred editor:
+                <strong class="text-info">WebStorm</strong> (cyan) for npm projects or
+                <strong class="text-danger">IntelliJ IDEA</strong> (red) for Java projects.
+                <em>Note: The appropriate IDE must be installed with URL handler support enabled.</em>
+            </p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
         <!-- Project Tabs -->
         <ul class="nav nav-tabs" id="projectTabs" role="tablist">
             <li class="nav-item" role="presentation">
@@ -279,29 +291,19 @@
                                             PayBubble Angular Wireframe
                                             <span class="badge bg-secondary ms-2" data-service-branch="paybubble-ang">...</span>
                                         </h5>
-                                            <small class="health-indicator" data-url="http://localhost:3010/health">:3010</small>
+                                            <small class="health-indicator" data-url="http://localhost:3010">:3010</small>
                                         </div>
                                         <p class="mb-1">Simplified wireframe with stubbed data - no auth required</p>
                                     </a>
                                     <a href="http://localhost:3011" target="_blank" class="list-group-item list-group-item-action">
                                         <div class="d-flex w-100 justify-content-between">
                                             <h5 class="mb-1">
-                                            PayBubble React Wireframe
+                                            PayBubble React
                                             <span class="badge bg-secondary ms-2" data-service-branch="paybubble-react">...</span>
                                         </h5>
-                                            <small class="health-indicator" data-url="http://localhost:3011/health">:3011</small>
+                                            <small class="health-indicator" data-url="http://localhost:3011">:3011</small>
                                         </div>
-                                        <p class="mb-1">React version - Simplified wireframe with stubbed data - no auth required</p>
-                                    </a>
-                                    <a href="http://localhost:3012" target="_blank" class="list-group-item list-group-item-action">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">
-                                            PayBubble Vue Wireframe
-                                            <span class="badge bg-secondary ms-2" data-service-branch="paybubble-vue">...</span>
-                                        </h5>
-                                            <small class="health-indicator" data-url="http://localhost:3012/health">:3012</small>
-                                        </div>
-                                        <p class="mb-1">Vue version - Simplified wireframe with stubbed data - no auth required</p>
+                                        <p class="mb-1">React payment UI with JWT authentication - Auto-redirects to auth-server</p>
                                     </a>
                                 </div>
                             </div>
@@ -350,6 +352,16 @@
                                             <small>:15672</small>
                                         </div>
                                         <p class="mb-1">Message broker (admin/admin)</p>
+                                    </a>
+                                    <a href="http://localhost:3500/api/cases/ccd/1111111111111111" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">
+                                            DB Tool Spring Boot
+                                            <span class="badge bg-secondary ms-2" data-service-branch="db-tool-spring-boot">...</span>
+                                        </h5>
+                                            <small class="health-indicator" data-url="http://localhost:3500/api/cases/ccd/1111111111111111">:3500</small>
+                                        </div>
+                                        <p class="mb-1">Database query tool for payments and refunds</p>
                                     </a>
                                 </div>
                             </div>
@@ -829,6 +841,70 @@
                                     <li>Redux for state management</li>
                                     <li>CodeMirror for editing</li>
                                     <li>Markdown rendering</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- JWT Authentication Example -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <h3 class="mb-0">Authentication Examples</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group">
+                                    <a href="http://localhost:3000" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Auth Server</h5>
+                                            <small class="health-indicator" data-url="http://localhost:3000">:3000</small>
+                                        </div>
+                                        <p class="mb-1">Next.js authentication server with JWT token generation</p>
+                                    </a>
+                                    <a href="http://localhost:5173" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">My React App</h5>
+                                            <small class="health-indicator" data-url="http://localhost:5173">:5173</small>
+                                        </div>
+                                        <p class="mb-1">Example React app with JWT authentication and admin routes</p>
+                                    </a>
+                                    <a href="http://localhost:3001/api/health" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">My React App API</h5>
+                                            <small class="health-indicator" data-url="http://localhost:3001/api/health">:3001</small>
+                                        </div>
+                                        <p class="mb-1">Express backend with JWT verification middleware</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- JWT Auth Info -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-info text-white">
+                                <h3 class="mb-0">About JWT Authentication</h3>
+                            </div>
+                            <div class="card-body">
+                                <h5>Architecture:</h5>
+                                <ul class="list-unstyled">
+                                    <li><strong>Auth Server:</strong> Centralized authentication with NextAuth.js</li>
+                                    <li><strong>JWT Tokens:</strong> Signed with HMAC-SHA256</li>
+                                    <li><strong>Auto-redirect:</strong> Unauthenticated users redirected to login</li>
+                                    <li><strong>Backend Verification:</strong> API validates JWT signatures</li>
+                                </ul>
+                                <h5 class="mt-3">Security Features:</h5>
+                                <ul class="list-unstyled">
+                                    <li><strong>Signature Verification:</strong> Prevents token tampering</li>
+                                    <li><strong>Role-Based Access:</strong> Admin vs user permissions</li>
+                                    <li><strong>Protected APIs:</strong> All data requests verified</li>
+                                    <li><strong>Playwright Tests:</strong> Automated security testing</li>
+                                </ul>
+                                <h5 class="mt-3">Test Users:</h5>
+                                <ul class="list-unstyled">
+                                    <li><strong>chris / 1234:</strong> Admin user</li>
+                                    <li><strong>bob / 1234:</strong> Regular user</li>
                                 </ul>
                             </div>
                         </div>
