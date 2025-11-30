@@ -5,6 +5,7 @@ pipeline {
     environment {
         REGISTRY = 'localhost:5000'
         IMAGE_NAME = 'dev-portal'
+        DOCKER_HOST = 'unix:///var/run/docker.sock'
     }
 
     stages {
