@@ -54,6 +54,11 @@
                     Vote
                 </button>
             </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="share-tab" data-bs-toggle="tab" data-bs-target="#share" type="button" role="tab">
+                    Share
+                </button>
+            </li>
             <li class="nav-item ms-auto" role="presentation">
                 <button class="nav-link" id="reference-tab" data-bs-toggle="tab" data-bs-target="#reference" type="button" role="tab">
                     Reference Projects
@@ -146,96 +151,101 @@
 
             <!-- FAMILY TREE Tab -->
             <div class="tab-pane fade" id="family-tree" role="tabpanel">
-                <!-- Stack Control -->
                 <div class="row mt-3">
-                    <div class="col-12 mb-3">
-                        <div class="card border-primary">
-                            <div class="card-body">
-                                <div class="d-flex w-100 justify-content-between align-items-center">
-                                    <div class="d-flex align-items-center">
-                                        <div>
-                                            <h4 class="mb-1">Family Tree Stack Control</h4>
-                                            <p class="mb-0 text-muted">Start/stop all Family Tree services (React + APIs + DBs)</p>
-                                        </div>
-                                        <span class="stack-status-dot stack-status-stopped" data-stack-id="family-tree">●</span>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input stack-toggle" type="checkbox" data-stack-id="family-tree" onchange="toggleStack('family-tree', this)" style="width: 60px; height: 30px;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <!-- Family Tree Applications -->
+                    <!-- Family Tree Application -->
                     <div class="col-md-6 mb-4">
                         <div class="card">
                             <div class="card-header bg-primary text-white">
-                                <h3 class="mb-0">Applications</h3>
+                                <h3 class="mb-0">Application</h3>
                             </div>
                             <div class="card-body">
                                 <div class="list-group">
-                                    <a href="http://localhost:4202" target="_blank" class="list-group-item list-group-item-action">
+                                    <a href="http://localhost:3500" target="_blank" class="list-group-item list-group-item-action active">
                                         <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">
-                                            Family Tree React
-                                            <span class="badge bg-secondary ms-2" data-service-branch="family-tree-react">...</span>
-                                        </h5>
-                                            <small>:4202</small>
+                                            <h5 class="mb-1">Family Tree App</h5>
+                                            <small class="health-indicator" data-url="http://localhost:3500">:3500</small>
                                         </div>
-                                        <p class="mb-1">React family tree viewer application</p>
+                                        <p class="mb-1">Spring Boot 3 + Thymeleaf family tree viewer with form login</p>
+                                        <small>Users: chris, family-au, family-ca, family-uk (password: changeme)</small>
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Family Tree APIs -->
+                    <!-- Database Statistics -->
                     <div class="col-md-6 mb-4">
                         <div class="card">
                             <div class="card-header bg-success text-white">
-                                <h3 class="mb-0">APIs</h3>
+                                <h3 class="mb-0">Database Statistics</h3>
                             </div>
                             <div class="card-body">
-                                <div class="list-group">
-                                    <a href="http://localhost:3200/health" target="_blank" class="list-group-item list-group-item-action">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">
-                                            Family Tree API (Java)
-                                            <span class="badge bg-secondary ms-2" data-service-branch="family-tree-api-java">...</span>
-                                        </h5>
-                                            <small class="health-indicator" data-url="http://localhost:3200/health">:3200</small>
-                                        </div>
-                                        <p class="mb-1">Spring Boot family tree API</p>
-                                    </a>
-                                    <a href="http://localhost:3300/health" target="_blank" class="list-group-item list-group-item-action">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">
-                                            Family Tree API (Quarkus)
-                                            <span class="badge bg-secondary ms-2" data-service-branch="family-tree-api-quarkus">...</span>
-                                        </h5>
-                                            <small class="health-indicator" data-url="http://localhost:3300/health">:3300</small>
-                                        </div>
-                                        <p class="mb-1">Quarkus family tree API</p>
-                                    </a>
-                                    <a href="http://localhost:3100/health" target="_blank" class="list-group-item list-group-item-action">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">
-                                            Family Tree API (Node)
-                                            <span class="badge bg-secondary ms-2" data-service-branch="family-tree-api-node">...</span>
-                                        </h5>
-                                            <small class="health-indicator" data-url="http://localhost:3100/health">:3100</small>
-                                        </div>
-                                        <p class="mb-1">Node.js/Express family tree API</p>
-                                    </a>
-                                    <a href="http://localhost:3001/health" target="_blank" class="list-group-item list-group-item-action">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Tree SVG API</h5>
-                                            <small class="health-indicator" data-url="http://localhost:3001/health">:3001</small>
-                                        </div>
-                                        <p class="mb-1">Family tree SVG generation API</p>
-                                    </a>
+                                <p class="text-muted mb-3">genealogy.db (SQLite)</p>
+                                <div class="row text-center">
+                                    <div class="col-4">
+                                        <h2 class="mb-0 text-primary">68,550</h2>
+                                        <small class="text-muted">People</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <h2 class="mb-0 text-success">9,848</h2>
+                                        <small class="text-muted">DNA Matches</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <h2 class="mb-0 text-info">434</h2>
+                                        <small class="text-muted">Match Trees</small>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row text-center">
+                                    <div class="col-6">
+                                        <h4 class="mb-0">121</h4>
+                                        <small class="text-muted">Census Records</small>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4 class="mb-0">122</h4>
+                                        <small class="text-muted">Relationships</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Info -->
+                    <div class="col-12 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-warning text-dark">
+                                <h3 class="mb-0">System Information</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h5>Tech Stack:</h5>
+                                        <ul class="list-unstyled">
+                                            <li><strong>Backend:</strong> Spring Boot 3.4.1, Java 17</li>
+                                            <li><strong>Frontend:</strong> Thymeleaf SSR</li>
+                                            <li><strong>Database:</strong> SQLite</li>
+                                            <li><strong>Auth:</strong> Spring Security Form Login</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h5>Features:</h5>
+                                        <ul class="list-unstyled">
+                                            <li>User authentication</li>
+                                            <li>Per-user tree access control</li>
+                                            <li>Ancestry-style card UI</li>
+                                            <li>Static SVG tree diagrams</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h5>Configured Trees:</h5>
+                                        <ul class="list-unstyled">
+                                            <li>Worthington Family</li>
+                                            <li>Wood Family</li>
+                                            <li>Goodall Family</li>
+                                            <li>Heywood Family</li>
+                                            <li>Wrathall Family</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -353,13 +363,13 @@
                                         </div>
                                         <p class="mb-1">Message broker (admin/admin)</p>
                                     </a>
-                                    <a href="http://localhost:3500/api/cases/ccd/1111111111111111" target="_blank" class="list-group-item list-group-item-action">
+                                    <a href="http://localhost:3500/api/cases/ccd/1000000000000001" target="_blank" class="list-group-item list-group-item-action">
                                         <div class="d-flex w-100 justify-content-between">
                                             <h5 class="mb-1">
                                             DB Tool Spring Boot
                                             <span class="badge bg-secondary ms-2" data-service-branch="db-tool-spring-boot">...</span>
                                         </h5>
-                                            <small class="health-indicator" data-url="http://localhost:3500/api/cases/ccd/1111111111111111">:3500</small>
+                                            <small class="health-indicator" data-url="http://localhost:3500/api/cases/ccd/1000000000000001">:3500</small>
                                         </div>
                                         <p class="mb-1">Database query tool for payments and refunds</p>
                                     </a>
@@ -782,6 +792,133 @@
                                             <li><a href="https://github.com/chrisworth75/vote-api" target="_blank" class="btn btn-sm btn-outline-primary mt-1">Vote API Repo</a></li>
                                             <li><a href="https://github.com/chrisworth75/vote-ui" target="_blank" class="btn btn-sm btn-outline-primary mt-1">Vote UI Repo</a></li>
                                         </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SHARE Tab -->
+            <div class="tab-pane fade" id="share" role="tabpanel">
+                <!-- Stack Control -->
+                <div class="row mt-3">
+                    <div class="col-12 mb-3">
+                        <div class="card border-primary">
+                            <div class="card-body">
+                                <div class="d-flex w-100 justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h4 class="mb-1">Share Stack Control</h4>
+                                            <p class="mb-0 text-muted">Start/stop all Share services (API + DB)</p>
+                                        </div>
+                                        <span class="stack-status-dot stack-status-stopped" data-stack-id="share">●</span>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input stack-toggle" type="checkbox" data-stack-id="share" onchange="toggleStack('share', this)" style="width: 60px; height: 30px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <!-- Share Applications (Future) -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h3 class="mb-0">Applications</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group">
+                                    <div class="list-group-item">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1 text-muted">Frontend (Coming Soon)</h5>
+                                        </div>
+                                        <p class="mb-1 text-muted">React/Angular/Vue frontend applications will be added here</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Share APIs -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <h3 class="mb-0">APIs & Database</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group">
+                                    <a href="http://localhost:8090/actuator/health" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">
+                                            Shareround API
+                                            <span class="badge bg-secondary ms-2" data-service-branch="shareround-api">...</span>
+                                        </h5>
+                                            <small class="health-indicator" data-url="http://localhost:8090/actuator/health">:8090</small>
+                                        </div>
+                                        <p class="mb-1">Spring Boot 3.2 community sharing API (Java 21)</p>
+                                    </a>
+                                    <div class="list-group-item">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">
+                                            Shareround DB
+                                            <span class="badge bg-secondary ms-2" data-service-branch="shareround-db">...</span>
+                                        </h5>
+                                            <small>:5455</small>
+                                        </div>
+                                        <p class="mb-1">PostgreSQL - Communities, users, items, transactions, kudos</p>
+                                        <small class="text-muted">Host: localhost:5455 | DB: shareround | User: shareround</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Share System Info -->
+                    <div class="col-12 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-warning text-dark">
+                                <h3 class="mb-0">System Information</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h5>About Shareround:</h5>
+                                        <p>Community sharing platform - "Freecycle for groups who know each other" with a kudos/reputation system.</p>
+                                        <ul class="list-unstyled">
+                                            <li><strong>Create Communities:</strong> Private groups with join codes</li>
+                                            <li><strong>Share Items:</strong> List items you want to give away</li>
+                                            <li><strong>Request Items:</strong> Ask for items you need</li>
+                                            <li><strong>Build Reputation:</strong> Kudos system (1-5 stars)</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h5>Tech Stack:</h5>
+                                        <ul class="list-unstyled">
+                                            <li><strong>Backend:</strong> Spring Boot 3.2, Java 21</li>
+                                            <li><strong>Database:</strong> PostgreSQL + Flyway</li>
+                                            <li><strong>Auth:</strong> Spring Security (JWT ready)</li>
+                                            <li><strong>Docs:</strong> OpenAPI/Swagger</li>
+                                            <li><strong>Tests:</strong> Testcontainers</li>
+                                        </ul>
+                                        <h5 class="mt-3">Modern Java Features:</h5>
+                                        <ul class="list-unstyled">
+                                            <li>Sealed classes for status flows</li>
+                                            <li>Records for DTOs</li>
+                                            <li>Pattern matching in switch</li>
+                                            <li>Virtual threads enabled</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h5>Item Status Flow:</h5>
+                                        <code>AVAILABLE → PROMISED → COLLECTED → CLOSED</code>
+                                        <h5 class="mt-3">Request Status Flow:</h5>
+                                        <code>PENDING → ACCEPTED | REJECTED | WITHDRAWN</code>
+                                        <h5 class="mt-3">API Testing:</h5>
+                                        <p class="text-muted small">Bruno collection at:<br><code>dev-share/shareround/bruno/</code></p>
                                     </div>
                                 </div>
                             </div>
