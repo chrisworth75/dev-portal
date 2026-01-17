@@ -44,7 +44,8 @@ const PROJECT_PATHS = {
   'freg': '/Users/chris/dev-freg',
   'family-tree': '/Users/chris/dev-familytree',
   'movies': '/Users/chris/dev-movies',
-  'feepay': '/Users/chris/dev-feepay'
+  'feepay': '/Users/chris/dev-feepay',
+  'share': '/Users/chris/dev-share'
 };
 
 // Docker service configuration - individual services
@@ -60,10 +61,7 @@ const DOCKER_SERVICES = {
   'freg-react': { path: '/Users/chris/dev-freg', service: 'freg-react-frontend', projectPath: '/Users/chris/dev-freg/freg-react' },
   'freg-api': { path: '/Users/chris/dev-freg', service: 'freg-api', projectPath: '/Users/chris/dev-freg/freg-api' },
   'freg-db': { path: '/Users/chris/dev-freg', service: 'freg-db', projectPath: '/Users/chris/dev-freg/freg-db' },
-  'family-tree-react': { path: '/Users/chris/dev-familytree', service: 'family-tree-react-frontend', projectPath: '/Users/chris/dev-familytree/family-tree-react' },
-  'family-tree-api-java': { path: '/Users/chris/dev-familytree', service: 'family-tree-api-java', projectPath: '/Users/chris/dev-familytree/family-tree-api-java' },
-  'family-tree-api-node': { path: '/Users/chris/dev-familytree', service: 'family-tree-api-node', projectPath: '/Users/chris/dev-familytree/family-tree-api-node' },
-  'family-tree-api-quarkus': { path: '/Users/chris/dev-familytree', service: 'family-tree-api-quarkus', projectPath: '/Users/chris/dev-familytree/family-tree-api-quarkus' },
+  'family-tree-app': { path: '/Users/chris/dev-familytree', service: 'family-tree-app', projectPath: '/Users/chris/dev-familytree/family-tree-app' },
   'movies-react': { path: '/Users/chris/dev-movies', service: 'movies-react', projectPath: '/Users/chris/dev-movies/movies-react' },
   'movies-vue': { path: '/Users/chris/dev-movies', service: 'movies-vue', projectPath: '/Users/chris/dev-movies/movies-vue' },
   'movies-angular': { path: '/Users/chris/dev-movies', service: 'movies-angular', projectPath: '/Users/chris/dev-movies/movies-angular' },
@@ -75,6 +73,9 @@ const DOCKER_SERVICES = {
   'paybubble-ang': { path: '/Users/chris/dev-feepay', service: 'paybubble-ang', projectPath: '/Users/chris/dev-feepay/paybubble-ang' },
   'paybubble-react': { path: '/Users/chris/dev-feepay', service: 'paybubble-react', projectPath: '/Users/chris/dev-feepay/paybubble-react' },
   'db-tool-spring-boot': { path: '/Users/chris/dev-feepay', service: 'db-tool-spring-boot', projectPath: '/Users/chris/dev-feepay/db-tool-spring-boot' },
+  // Share (Shareround) services
+  'shareround-api': { path: '/Users/chris/dev-share/shareround', service: 'app', projectPath: '/Users/chris/dev-share/shareround' },
+  'shareround-db': { path: '/Users/chris/dev-share/shareround', service: 'db', projectPath: '/Users/chris/dev-share/shareround' },
 };
 
 // Docker stack configuration - entire projects
@@ -90,7 +91,7 @@ const DOCKER_STACKS = {
   },
   'family-tree': {
     name: 'Family Tree',
-    containers: ['family-tree-react-frontend', 'family-tree-api-java', 'family-tree-api-node', 'family-tree-api-quarkus', 'family-tree-db', 'family-tree-svg']
+    containers: ['family-tree-app']
   },
   'movies': {
     name: 'Movies',
@@ -99,6 +100,10 @@ const DOCKER_STACKS = {
   'feepay': {
     name: 'Fee & Pay',
     containers: ['ccpay-bubble', 'paybubble-ang', 'paybubble-react', 'ccpay-payment-app', 'payments-db', 'rse-idam-simulator', 'ccd-api-mock-node', 's2s-mock', 'local-service-bus', 'db-tool-spring-boot']
+  },
+  'share': {
+    name: 'Share',
+    containers: ['app', 'db']
   },
 };
 
