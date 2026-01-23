@@ -62,6 +62,7 @@ const DOCKER_SERVICES = {
   'freg-api': { path: '/Users/chris/dev-freg', service: 'freg-api', projectPath: '/Users/chris/dev-freg/freg-api' },
   'freg-db': { path: '/Users/chris/dev-freg', service: 'freg-db', projectPath: '/Users/chris/dev-freg/freg-db' },
   'family-tree-app': { path: '/Users/chris/dev-familytree', service: 'family-tree-app', projectPath: '/Users/chris/dev-familytree/family-tree-app' },
+  'd3-tree-service': { path: '/Users/chris/dev-familytree', service: 'd3-tree-service', projectPath: '/Users/chris/dev-familytree/d3-tree-service' },
   'movies-react': { path: '/Users/chris/dev-movies', service: 'movies-react', projectPath: '/Users/chris/dev-movies/movies-react' },
   'movies-vue': { path: '/Users/chris/dev-movies', service: 'movies-vue', projectPath: '/Users/chris/dev-movies/movies-vue' },
   'movies-angular': { path: '/Users/chris/dev-movies', service: 'movies-angular', projectPath: '/Users/chris/dev-movies/movies-angular' },

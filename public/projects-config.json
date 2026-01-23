@@ -1,0 +1,172 @@
+{
+  "projects": {
+    "freg-react": {
+      "path": "/Users/chris/dev-freg/freg-react",
+      "url": "http://localhost:4201",
+      "name": "Chris Freg React",
+      "ide": "webstorm",
+      "type": "npm"
+    },
+    "freg-angular": {
+      "path": "/Users/chris/dev-freg/freg-angular",
+      "url": "http://localhost:4200",
+      "name": "Chris Freg Angular",
+      "ide": "webstorm",
+      "type": "npm"
+    },
+    "freg-api": {
+      "path": "/Users/chris/dev-freg/freg-api",
+      "url": "http://localhost:5100/health",
+      "name": "Chris Freg API",
+      "ide": "webstorm",
+      "type": "npm"
+    },
+    "family-tree-react": {
+      "path": "/Users/chris/dev-family-tree/family-tree-react",
+      "url": "http://localhost:4202",
+      "name": "Family Tree React",
+      "ide": "webstorm",
+      "type": "npm"
+    },
+    "family-tree-api-java": {
+      "path": "/Users/chris/dev-family-tree/family-tree-api-java",
+      "url": "http://localhost:3200/health",
+      "name": "Family Tree API (Java)",
+      "ide": "idea",
+      "type": "java"
+    },
+    "family-tree-api-quarkus": {
+      "path": "/Users/chris/dev-family-tree/family-tree-api-quarkus",
+      "url": "http://localhost:3300/health",
+      "name": "Family Tree API (Quarkus)",
+      "ide": "idea",
+      "type": "java"
+    },
+    "family-tree-api-node": {
+      "path": "/Users/chris/dev-family-tree/family-tree-api-node",
+      "url": "http://localhost:3100/health",
+      "name": "Family Tree API (Node)",
+      "ide": "webstorm",
+      "type": "npm"
+    },
+    "d3-tree-service": {
+      "path": "/Users/chris/dev-familytree/d3-tree-service",
+      "url": "http://localhost:3300/health",
+      "name": "D3 Tree Service",
+      "ide": "webstorm",
+      "type": "npm"
+    },
+    "ccpay-bubble": {
+      "path": "/Users/chris/dev-feepay/ccpay-bubble",
+      "url": "http://localhost:3000",
+      "name": "CCPAY Bubble (Frontend)",
+      "ide": "webstorm",
+      "type": "npm"
+    },
+    "paybubble-ang": {
+      "path": "/Users/chris/dev-feepay/paybubble-ang",
+      "url": "http://localhost:4210",
+      "name": "PayBubble Angular Wireframe",
+      "ide": "webstorm",
+      "type": "npm"
+    },
+    "paybubble-react": {
+      "path": "/Users/chris/dev-feepay/paybubble-react",
+      "url": "http://localhost:3010",
+      "name": "PayBubble React",
+      "ide": "webstorm",
+      "type": "npm"
+    },
+    "paybubble-vue": {
+      "path": "/Users/chris/dev-feepay/paybubble-vue",
+      "url": "http://localhost:3012",
+      "name": "PayBubble Vue Wireframe",
+      "ide": "webstorm",
+      "type": "npm"
+    },
+    "movies-wireframe": {
+      "path": "/Users/chris/dev-movies/movies-wireframe",
+      "url": "http://localhost:4206",
+      "name": "Movies Wireframe",
+      "ide": "webstorm",
+      "type": "npm"
+    },
+    "movies-vue": {
+      "path": "/Users/chris/dev-movies/movies-vue",
+      "url": "http://localhost:4205",
+      "name": "Movies Vue",
+      "ide": "webstorm",
+      "type": "npm"
+    },
+    "movies-react": {
+      "path": "/Users/chris/dev-movies/movies-react",
+      "url": "http://localhost:4203",
+      "name": "Movies React",
+      "ide": "webstorm",
+      "type": "npm"
+    },
+    "movies-angular": {
+      "path": "/Users/chris/dev-movies/movies-angular",
+      "url": "http://localhost:4204",
+      "name": "Movies Angular",
+      "ide": "webstorm",
+      "type": "npm"
+    },
+    "movies-api": {
+      "path": "/Users/chris/dev-movies/movies-api",
+      "url": "http://localhost:3400/actuator/health",
+      "name": "Movies API",
+      "ide": "idea",
+      "type": "java"
+    },
+    "vote-ui": {
+      "path": "/Users/chris/dev-vote/vote-ui",
+      "url": "http://localhost:3005",
+      "name": "Vote UI (Vanilla JS)",
+      "ide": "webstorm",
+      "type": "npm"
+    },
+    "vote-ui-vue": {
+      "path": "/Users/chris/dev-vote/vote-ui-vue",
+      "url": "http://localhost:5173",
+      "name": "Vote UI Vue",
+      "ide": "webstorm",
+      "type": "npm"
+    },
+    "vote-ui-react": {
+      "path": "/Users/chris/dev-vote/vote-ui-react",
+      "url": "http://localhost:3006",
+      "name": "Vote UI React",
+      "ide": "webstorm",
+      "type": "npm"
+    },
+    "vote-ui-angular": {
+      "path": "/Users/chris/dev-vote/vote-ui-angular",
+      "url": "http://localhost:4207",
+      "name": "Vote UI Angular",
+      "ide": "webstorm",
+      "type": "npm"
+    },
+    "vote-api": {
+      "path": "/Users/chris/dev-vote/vote-api",
+      "url": "http://localhost:8085/api/polls",
+      "name": "Vote API",
+      "ide": "idea",
+      "type": "java"
+    },
+    "auth-server": {
+      "path": "/Users/chris/dev-examples/auth-server",
+      "url": "http://localhost:3000",
+      "name": "Auth Server",
+      "ide": "webstorm",
+      "type": "npm"
+    },
+    "shareround-api": {
+      "path": "/Users/chris/dev-share/shareround",
+      "url": "http://localhost:8090/actuator/health",
+      "name": "Shareround API",
+      "ide": "idea",
+      "type": "java"
+    }
+  }
+}
