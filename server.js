@@ -92,7 +92,7 @@ const DOCKER_STACKS = {
   },
   'family-tree': {
     name: 'Family Tree',
-    containers: ['family-tree-app']
+    containers: ['familytree-postgres']
   },
   'movies': {
     name: 'Movies',
