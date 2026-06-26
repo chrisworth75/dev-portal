@@ -166,7 +166,24 @@
                                             <small class="health-indicator" data-url="http://localhost:3200/login">:3200</small>
                                         </div>
                                         <p class="mb-1">Spring Boot 3 + Thymeleaf with D3.js tree visualization</p>
-                                        <small>Users: chris, family-au, family-ca, family-uk (password: changeme)</small>
+                                        <small>UI login: <code>dev-owner</code> / <code>dev-owner</code> (Keycloak) · API Basic: <code>chris</code> / <code>chris</code></small>
+                                    </a>
+                                    <a href="http://localhost:14202" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">
+                                            Family Tree React — Tier 1 (local)
+                                            <span class="badge bg-secondary ms-2" data-service-branch="family-tree-react">...</span>
+                                        </h5>
+                                            <small class="health-indicator" data-url="http://localhost:14202">:14202</small>
+                                        </div>
+                                        <p class="mb-1">Local container stack (<code>make t1-up</code>). Login <code>dev-owner</code> / <code>dev-owner</code>.</p>
+                                    </a>
+                                    <a href="http://familytree.192.168.0.100.nip.io" target="_blank" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Family Tree React — Tier 3 (Calculon, always-on)</h5>
+                                            <small class="health-indicator" data-url="http://familytree.192.168.0.100.nip.io">nip.io</small>
+                                        </div>
+                                        <p class="mb-1">k3s + ArgoCD on Calculon — up 24/7, log in any time. Login <code>dev-owner</code> / <code>dev-owner</code>.</p>
                                     </a>
                                 </div>
                                 <h5 class="mt-4">REST API Endpoints:</h5>
@@ -259,6 +276,72 @@
                                     <li><strong>search_freecen.py</strong> - Search FreeCEN census records</li>
                                     <li><strong>batch_freecen_search.py</strong> - Batch census searches</li>
                                 </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tier 3 (Calculon) — full stack + CI/CD -->
+                    <div class="col-12 mb-4">
+                        <div class="card border-dark">
+                            <div class="card-header bg-dark text-white">
+                                <h3 class="mb-0">Tier 3 — Calculon (always-on) · GitOps stack &amp; CI/CD</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted mb-3">k3s + ArgoCD on Calculon (<code>192.168.0.100</code>), reconciled from <code>main</code>. Up 24/7. App login <code>dev-owner</code> / <code>dev-owner</code>; API Basic <code>chris</code> / <code>chris</code>.</p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5>Application stack</h5>
+                                        <div class="list-group mb-3">
+                                            <a href="http://familytree.192.168.0.100.nip.io" target="_blank" class="list-group-item list-group-item-action">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h6 class="mb-1">Frontend (React)</h6>
+                                                    <small class="health-indicator" data-url="http://familytree.192.168.0.100.nip.io">nip.io</small>
+                                                </div>
+                                                <small class="text-muted">familytree.192.168.0.100.nip.io</small>
+                                            </a>
+                                            <a href="http://api.familytree.192.168.0.100.nip.io/actuator/health" target="_blank" class="list-group-item list-group-item-action">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h6 class="mb-1">API (Spring Boot)</h6>
+                                                    <small class="health-indicator" data-url="http://api.familytree.192.168.0.100.nip.io/actuator/health">health</small>
+                                                </div>
+                                                <small class="text-muted">api.familytree.192.168.0.100.nip.io · Basic <code>chris</code>/<code>chris</code></small>
+                                            </a>
+                                            <a href="http://keycloak.192.168.0.100.nip.io/realms/family-tree" target="_blank" class="list-group-item list-group-item-action">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h6 class="mb-1">Keycloak (realm: family-tree)</h6>
+                                                    <small class="health-indicator" data-url="http://keycloak.192.168.0.100.nip.io/realms/family-tree">realm</small>
+                                                </div>
+                                                <small class="text-muted">keycloak.192.168.0.100.nip.io</small>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>CI/CD &amp; GitOps</h5>
+                                        <div class="list-group mb-3">
+                                            <a href="http://calculon:8080" target="_blank" class="list-group-item list-group-item-action">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h6 class="mb-1">Jenkins (CI)</h6>
+                                                    <small class="health-indicator" data-url="http://calculon:8080/login">:8080</small>
+                                                </div>
+                                                <small class="text-muted">calculon:8080 · family-tree-ci · family-tree-react-ci · tier2-cd</small>
+                                            </a>
+                                            <a href="http://argocd.192.168.0.100.nip.io" target="_blank" class="list-group-item list-group-item-action">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h6 class="mb-1">ArgoCD (GitOps)</h6>
+                                                    <small class="health-indicator" data-url="http://argocd.192.168.0.100.nip.io/healthz">nip.io</small>
+                                                </div>
+                                                <small class="text-muted">argocd.192.168.0.100.nip.io · <code>admin</code> / argocd-initial-admin-secret</small>
+                                            </a>
+                                            <a href="http://192.168.0.100:5001/v2/_catalog" target="_blank" class="list-group-item list-group-item-action">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h6 class="mb-1">Image Registry</h6>
+                                                    <small class="health-indicator" data-url="http://192.168.0.100:5001/v2/">:5001</small>
+                                                </div>
+                                                <small class="text-muted">192.168.0.100:5001 (insecure) · build host = Calculon/amd64</small>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
