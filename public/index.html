@@ -159,46 +159,38 @@
                                 <h3 class="mb-0">Application</h3>
                             </div>
                             <div class="card-body">
+                                <p class="text-muted small mb-2">Mac-local (run from the IDE / <code>make t1-up</code>). Calculon's always-on tiers are in the card below.</p>
                                 <div class="list-group">
-                                    <a href="http://localhost:3200" target="_blank" class="list-group-item list-group-item-action active">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Family Tree App</h5>
-                                            <small class="health-indicator" data-url="http://localhost:3200/login">:3200</small>
-                                        </div>
-                                        <p class="mb-1">Spring Boot 3 + Thymeleaf with D3.js tree visualization</p>
-                                        <small>UI login: <code>dev-owner</code> / <code>dev-owner</code> (Keycloak) · API Basic: <code>chris</code> / <code>chris</code></small>
+                                    <a href="http://localhost:4202" target="_blank" class="list-group-item list-group-item-action active">
+                                        <h5 class="mb-1">React — Tier 0 (IDE) · localhost:4202</h5>
+                                        <p class="mb-0 small">Vite dev server against the native research DB. Login <code>dev-owner</code> / <code>dev-owner</code>.</p>
+                                    </a>
+                                    <a href="http://localhost:3200" target="_blank" class="list-group-item list-group-item-action">
+                                        <h5 class="mb-1">API — Tier 0 (IDE) · localhost:3200</h5>
+                                        <p class="mb-0 small">Spring Boot, <code>bigtree</code> profile. API Basic <code>chris</code> / <code>chris</code>.</p>
                                     </a>
                                     <a href="http://localhost:14202" target="_blank" class="list-group-item list-group-item-action">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">
-                                            Family Tree React — Tier 1 (local)
-                                            <span class="badge bg-secondary ms-2" data-service-branch="family-tree-react">...</span>
-                                        </h5>
-                                            <small class="health-indicator" data-url="http://localhost:14202">:14202</small>
-                                        </div>
-                                        <p class="mb-1">Local container stack (<code>make t1-up</code>). Login <code>dev-owner</code> / <code>dev-owner</code>.</p>
+                                        <h5 class="mb-1">React — Tier 1 (local containers) · localhost:14202</h5>
+                                        <p class="mb-0 small">Seeded container stack (<code>make t1-up</code>). Login <code>dev-owner</code> / <code>dev-owner</code>.</p>
                                     </a>
-                                    <a href="http://familytree.192.168.0.100.nip.io" target="_blank" class="list-group-item list-group-item-action">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Family Tree React — Tier 3 (Calculon, always-on)</h5>
-                                            <small class="health-indicator" data-url="http://familytree.192.168.0.100.nip.io">nip.io</small>
-                                        </div>
-                                        <p class="mb-1">k3s + ArgoCD on Calculon — up 24/7, log in any time. Login <code>dev-owner</code> / <code>dev-owner</code>.</p>
+                                    <a href="http://localhost:13200" target="_blank" class="list-group-item list-group-item-action">
+                                        <h5 class="mb-1">API — Tier 1 (local containers) · localhost:13200</h5>
+                                        <p class="mb-0 small">Seeded container stack API. Basic <code>chris</code> / <code>chris</code>.</p>
                                     </a>
                                 </div>
-                                <h5 class="mt-4">REST API Endpoints:</h5>
+                                <h5 class="mt-4">REST API Endpoints <small class="text-muted">(Tier 0 :3200 · Basic chris/chris)</small>:</h5>
                                 <div class="list-group list-group-flush small">
-                                    <a href="http://localhost:3200/api/trees/my-family/hierarchy" target="_blank" class="list-group-item list-group-item-action py-1">
-                                        <code>GET /api/trees/{slug}/hierarchy</code> - D3.js tree format
+                                    <a href="http://localhost:3200/api/stats" target="_blank" class="list-group-item list-group-item-action py-1">
+                                        <code>GET /api/stats</code> - tree size, top ancestors
                                     </a>
-                                    <a href="http://localhost:3200/api/trees/my-family/family-chart" target="_blank" class="list-group-item list-group-item-action py-1">
-                                        <code>GET /api/trees/{slug}/family-chart</code> - Flat array format
+                                    <a href="http://localhost:3200/api/person/1000" target="_blank" class="list-group-item list-group-item-action py-1">
+                                        <code>GET /api/person/{id}</code> - person + relationships (1000 = Chris)
                                     </a>
-                                    <a href="http://localhost:3200/api/persons/1000" target="_blank" class="list-group-item list-group-item-action py-1">
-                                        <code>GET /api/persons/{id}</code> - Person with relationships
+                                    <a href="http://localhost:3200/api/person/1000/ancestors" target="_blank" class="list-group-item list-group-item-action py-1">
+                                        <code>GET /api/person/{id}/ancestors</code> - ancestor list
                                     </a>
-                                    <a href="http://localhost:3200/api/persons/search?name=Wrathall" target="_blank" class="list-group-item list-group-item-action py-1">
-                                        <code>GET /api/persons/search</code> - Search by name/place
+                                    <a href="http://localhost:3200/api/person/search?name=Wrathall" target="_blank" class="list-group-item list-group-item-action py-1">
+                                        <code>GET /api/person/search</code> - search by name/place
                                     </a>
                                 </div>
                                 <p class="mt-2 mb-0"><small class="text-muted">Full API collection: <code>bruno-collection/</code></small></p>
@@ -213,10 +205,7 @@
                             <div class="card-body">
                                 <div class="list-group">
                                     <a href="http://localhost:3300/health" target="_blank" class="list-group-item list-group-item-action">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">D3 Tree Service</h5>
-                                            <small class="health-indicator" data-url="http://localhost:3300/health">:3300</small>
-                                        </div>
+                                        <h5 class="mb-1">D3 Tree Service · localhost:3300</h5>
                                         <p class="mb-1">Server-side D3 tree rendering with jsdom</p>
                                         <small class="text-muted">POST /render - accepts tree JSON, returns SVG</small>
                                     </a>
@@ -280,64 +269,75 @@
                         </div>
                     </div>
 
-                    <!-- Tier 3 (Calculon) — full stack + CI/CD -->
+                    <!-- Calculon — everything for Family Tree on the box -->
                     <div class="col-12 mb-4">
                         <div class="card border-dark">
                             <div class="card-header bg-dark text-white">
-                                <h3 class="mb-0">Tier 3 — Calculon (always-on) · GitOps stack &amp; CI/CD</h3>
+                                <h3 class="mb-0">Calculon — Family Tree (always-on)</h3>
                             </div>
                             <div class="card-body">
-                                <p class="text-muted mb-3">k3s + ArgoCD on Calculon (<code>192.168.0.100</code>), reconciled from <code>main</code>. Up 24/7. App login <code>dev-owner</code> / <code>dev-owner</code>; API Basic <code>chris</code> / <code>chris</code>.</p>
+                                <p class="text-muted mb-3">Everything for the family tree on Calculon (<code>192.168.0.100</code>): the Tier 2 (compose) &amp; Tier 3 (k3s/ArgoCD) app stacks, Jenkins CI/CD, ArgoCD and the image registry. App login <code>dev-owner</code> / <code>dev-owner</code>; API Basic <code>chris</code> / <code>chris</code>.</p>
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <h5>Application stack</h5>
+                                    <div class="col-md-4">
+                                        <h5>Tier 3 — k3s + ArgoCD</h5>
                                         <div class="list-group mb-3">
                                             <a href="http://familytree.192.168.0.100.nip.io" target="_blank" class="list-group-item list-group-item-action">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h6 class="mb-1">Frontend (React)</h6>
-                                                    <small class="health-indicator" data-url="http://familytree.192.168.0.100.nip.io">nip.io</small>
-                                                </div>
+                                                <h6 class="mb-1">Frontend (React)</h6>
                                                 <small class="text-muted">familytree.192.168.0.100.nip.io</small>
                                             </a>
                                             <a href="http://api.familytree.192.168.0.100.nip.io/actuator/health" target="_blank" class="list-group-item list-group-item-action">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h6 class="mb-1">API (Spring Boot)</h6>
-                                                    <small class="health-indicator" data-url="http://api.familytree.192.168.0.100.nip.io/actuator/health">health</small>
-                                                </div>
-                                                <small class="text-muted">api.familytree.192.168.0.100.nip.io · Basic <code>chris</code>/<code>chris</code></small>
+                                                <h6 class="mb-1">API</h6>
+                                                <small class="text-muted">api.familytree.192.168.0.100.nip.io</small>
                                             </a>
                                             <a href="http://keycloak.192.168.0.100.nip.io/realms/family-tree" target="_blank" class="list-group-item list-group-item-action">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h6 class="mb-1">Keycloak (realm: family-tree)</h6>
-                                                    <small class="health-indicator" data-url="http://keycloak.192.168.0.100.nip.io/realms/family-tree">realm</small>
-                                                </div>
+                                                <h6 class="mb-1">Keycloak</h6>
                                                 <small class="text-muted">keycloak.192.168.0.100.nip.io</small>
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <h5>Tier 2 — compose</h5>
+                                        <div class="list-group mb-3">
+                                            <a href="http://calculon:24202" target="_blank" class="list-group-item list-group-item-action">
+                                                <h6 class="mb-1">Frontend (React)</h6>
+                                                <small class="text-muted">calculon:24202</small>
+                                            </a>
+                                            <a href="http://calculon:23200" target="_blank" class="list-group-item list-group-item-action">
+                                                <h6 class="mb-1">API</h6>
+                                                <small class="text-muted">calculon:23200</small>
+                                            </a>
+                                            <a href="http://calculon:28081/realms/family-tree" target="_blank" class="list-group-item list-group-item-action">
+                                                <h6 class="mb-1">Keycloak</h6>
+                                                <small class="text-muted">calculon:28081</small>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
                                         <h5>CI/CD &amp; GitOps</h5>
                                         <div class="list-group mb-3">
+                                            <a href="http://calculon:8080/job/family-tree-ci/" target="_blank" class="list-group-item list-group-item-action">
+                                                <h6 class="mb-1">Jenkins · family-tree-ci</h6>
+                                                <small class="text-muted">API build + Testcontainers + deploy</small>
+                                            </a>
+                                            <a href="http://calculon:8080/job/family-tree-react-ci/" target="_blank" class="list-group-item list-group-item-action">
+                                                <h6 class="mb-1">Jenkins · family-tree-react-ci</h6>
+                                                <small class="text-muted">React build + Playwright e2e</small>
+                                            </a>
+                                            <a href="http://calculon:8080/job/family-tree-tier2-cd/" target="_blank" class="list-group-item list-group-item-action">
+                                                <h6 class="mb-1">Jenkins · family-tree-tier2-cd</h6>
+                                                <small class="text-muted">Tier 2 compose deploy</small>
+                                            </a>
                                             <a href="http://calculon:8080" target="_blank" class="list-group-item list-group-item-action">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h6 class="mb-1">Jenkins (CI)</h6>
-                                                    <small class="health-indicator" data-url="http://calculon:8080/login">:8080</small>
-                                                </div>
-                                                <small class="text-muted">calculon:8080 · family-tree-ci · family-tree-react-ci · tier2-cd</small>
+                                                <h6 class="mb-1">Jenkins (home)</h6>
+                                                <small class="text-muted">calculon:8080</small>
                                             </a>
                                             <a href="http://argocd.192.168.0.100.nip.io" target="_blank" class="list-group-item list-group-item-action">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h6 class="mb-1">ArgoCD (GitOps)</h6>
-                                                    <small class="health-indicator" data-url="http://argocd.192.168.0.100.nip.io/healthz">nip.io</small>
-                                                </div>
-                                                <small class="text-muted">argocd.192.168.0.100.nip.io · <code>admin</code> / argocd-initial-admin-secret</small>
+                                                <h6 class="mb-1">ArgoCD</h6>
+                                                <small class="text-muted">argocd.192.168.0.100.nip.io · <code>admin</code></small>
                                             </a>
                                             <a href="http://192.168.0.100:5001/v2/_catalog" target="_blank" class="list-group-item list-group-item-action">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h6 class="mb-1">Image Registry</h6>
-                                                    <small class="health-indicator" data-url="http://192.168.0.100:5001/v2/">:5001</small>
-                                                </div>
-                                                <small class="text-muted">192.168.0.100:5001 (insecure) · build host = Calculon/amd64</small>
+                                                <h6 class="mb-1">Image Registry</h6>
+                                                <small class="text-muted">192.168.0.100:5001</small>
                                             </a>
                                         </div>
                                     </div>
